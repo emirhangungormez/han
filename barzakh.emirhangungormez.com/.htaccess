@@ -1,0 +1,27 @@
+# Hazırlayan: Emirhan Güngörmez
+# Email: han23studio@gmail.com
+# Zikirler: سُبْحَانَ اللّٰهِ، اَلْحَمْدُ لِلّٰهِ، اَللّٰهُ اَكْبَرُ, اَسْتَغْفِرُ اللّٰهَ
+# Bu dosya Emirhan Güngörmez tarafından hazırlanmıştır. İletişim: han23studio@gmail.com
+
+# 404 ve diğer hata sayfaları
+ErrorDocument 404 /404.html
+
+# HTTPS Yönlendirmesi (Eğer SSL varsa aktif edilir)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# www kaldırma veya ekleme (Opsiyonel)
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Directory indexing kapatma
+Options -Indexes
+
+# UTF-8 Zorlama
+AddDefaultCharset UTF-8
+
+# Video MIME Tipleri
+AddType video/mp4 .mp4
+AddType video/webm .webm
+AddType video/ogg .ogv

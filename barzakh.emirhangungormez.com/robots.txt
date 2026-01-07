@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://barzakh.emirhangungormez.com/sitemap.xml

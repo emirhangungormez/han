@@ -1,0 +1,273 @@
+<!-- 
+    Hazırlayan: Emirhan Güngörmez
+    Email: han23studio@gmail.com
+    Zikirler: سُبْحَانَ اللّٰهِ، اَلْحَمْدُ لِلّٰهِ، اَللّٰهُ اَكْبَرُ, اَسْتَغْفِرُ اللّٰهَ
+    Bu dosya Emirhan Güngörmez tarafından hazırlanmıştır. İletişim: han23studio@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barzakh: Star Gardener | Resmi Web Sitesi</title>
+    <meta name="description"
+        content="Barzakh: Star Gardener, Tasavvuf mistisizminden ve Küçük Prens'in şiirsel ruhundan ilham alan bir macera-bulmaca oyunudur. Emir'in metafiziksel yolculuğuna katılın.">
+    <meta name="keywords"
+        content="Barzakh, Star Gardener, Han Interactive, Bağımsız Oyun, Indie Game, Macera Oyunu, Bulmaca Oyunu, Türk Yapımı Oyun, Unreal Engine 5">
+    <meta name="author" content="Emirhan Güngörmez">
+    <link rel="canonical" href="https://barzakh.emirhangungormez.com/">
+
+    <!-- Social Media Meta Tags (Open Graph) -->
+    <meta property="og:title" content="Barzakh: Star Gardener">
+    <meta property="og:description"
+        content="Metafizik sınırları keşfedin ve dünyalar arasında mahsur kalmış bir gezginin şiirsel ruhunu keşfedin.">
+    <meta property="og:image"
+        content="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3849950/header.jpg">
+    <meta property="og:url" content="https://barzakh.emirhangungormez.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Barzakh: Star Gardener">
+    <meta name="twitter:description" content="Tasavvuf ve şiirsel bir yolculuk. Barzakh dünyasını keşfedin.">
+    <meta name="twitter:image"
+        content="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3849950/header.jpg">
+    <meta name="twitter:site" content="@barzakhgame">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="style.css?v=1.1">
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <!-- Background Video -->
+    <div class="video-bg-container">
+        <video src="video/background.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container-narrow header-nav">
+                <div class="studio-logo">
+                    <img src="img/logo/han.svg" alt="Han Interactive Logo">
+                </div>
+                <div class="lang-switcher">
+                    <a href="index.html" class="active">TR</a>
+                    <span>|</span>
+                    <a href="en.html">EN</a>
+                </div>
+                <div class="game-logo">
+                    <img src="img/logo/logo.svg" alt="Barzakh Logosu">
+                </div>
+            </div>
+
+            <div class="central-content">
+                <div class="video-frame container-narrow">
+                    <div class="custom-video-player" id="mainPlayer">
+                        <video autoplay loop muted playsinline preload="auto" class="main-video">
+                            <source src="video/gameplay.mp4?v=1.1" type="video/mp4">
+                            Tarayıcınız video etiketini desteklemiyor.
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-center-btn" id="playBtn">
+                                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                </svg>
+                            </button>
+                            <button class="mute-corner-btn" id="muteBtn">
+                                <svg class="icon-unmute" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z" />
+                                </svg>
+                                <svg class="icon-mute" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                                    <path
+                                        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v1.79l2.48 2.48c.01-.08.02-.16.02-.24zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steam Store Widget -->
+                <div class="steam-official-widget">
+                    <iframe src="https://store.steampowered.com/widget/3849950/" frameborder="0" width="646"
+                        height="190"></iframe>
+                </div>
+            </div>
+
+            <div class="scroll-down" onclick="lenis.scrollTo('#about-section')">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+        </section>
+
+
+
+        <!-- About Us Section -->
+        <section id="about-section" class="about-section-new">
+            <div class="container-narrow about-container">
+                <h1>Barzakh'a İlk Bakış</h1>
+                <h2 class="sub-title-main">Barzakh: Star Gardener, Küçük Prens'ten ilham alan, farklı evrenlerde
+                    kendinizin bir yansımasıyla karşılaştığınız bir bulmaca ve macera oyunudur.</h2>
+                <div class="about-description">
+                    <p>İçsel yolculuğunuzda yıldızları toplar ve zihninizde bir bahçe yetiştirirsiniz. Metafizik
+                        sınırları keşfedin ve dünyalar arasında mahsur kalmış bir gezginin şiirsel ruhunu keşfedin.</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>01. Barzakh hangi oyun motoruyla geliştirildi?</h3>
+                        <p>Barzakh, Unreal Engine 5 ile geliştirildi. Bu motor, sinematik kalitede görseller ve
+                            sürükleyici bir dünya yaratma fırsatı sunuyor.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>02. Barzakh: Star Gardener nedir?</h3>
+                        <p>Barzakh: Star Gardener, Tasavvuf mistisizminden ve Küçük Prens'in şiirsel ruhundan ilham alan
+                            bir macera-bulmaca oyunudur. Uçak kazasından sonra çölde mahsur kalan Emir, metafiziksel bir
+                            yolculuğa çıkar.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>03. Berzah ne anlama geliyor?</h3>
+                        <p>Berzah, İslam mistisizminde dünya hayatı ile ahiret arasındaki görünmez perde anlamına gelir.
+                            Oyunda, Emir'in ruhsal yolculuğunu ve evrenler arasındaki arayışını simgeler.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>04. Ne zaman yayınlanacak?</h3>
+                        <p>Oyun hala geliştirme aşamasındadır. Henüz belirlenmiş bir çıkış tarihi yok, ancak
+                            güncellemeler için sosyal medya hesaplarımızı takip edebilirsiniz!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- News Section -->
+        <section id="news-section" class="news-section">
+            <div class="container-narrow">
+                <h2 class="section-title">Haberler & Röportajlar</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-content">
+                            <span class="news-tag">Radyo Röportajı</span>
+                            <div class="news-header">
+                                <img src="https://www1.wdr.de/resources/img/wdr/logo/wdr_logo.svg" alt="WDR Logosu"
+                                    class="news-brand-logo">
+                                <h3>WDR: "Pixel voller Vorurteile? Wie Games den Islam zeichnen"</h3>
+                            </div>
+                            <p>Almanya'nın en büyük yayıncı kuruluşlarından WDR'nin hazırladığı bu özel dosyada,
+                                Barzakh'ın geliştirme süreci ve İslam'ın oyunlardaki temsili üzerine bir röportaj
+                                gerçekleştirildi. Yayının son 5 dakikası tamamen Barzakh'a ayrılmıştır.</p>
+                            <a href="https://www1.wdr.de/radio/wdr5/sendungen/lebenszeichen/wie-games-den-islam-zeichnen-100.html#:~:text=Viele%20Games%20zeigen%20Muslime%20als,erkl%C3%A4ren%20und%20Ber%C3%BChrungspunkte%20zu%20schaffen."
+                                target="_blank" class="news-link">
+                                Yayını Dinle
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16">
+                                    <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devlog Section -->
+        <section id="devlog-section" class="news-section" style="padding-top: 0;">
+            <div class="container-narrow">
+                <h2 class="section-title">YouTube Devlog</h2>
+                <div class="video-grid">
+                    <a href="https://www.youtube.com/watch?v=dhsVbxH0BX4&t" target="_blank" class="video-card">
+                        <div class="devlog-thumbnail">
+                            <img src="https://img.youtube.com/vi/dhsVbxH0BX4/maxresdefault.jpg" alt="Barzakh Devlog">
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="video-title">Barzakh: Geliştirme Süreci ve Mekanikler</h3>
+                    </a>
+                    <!-- Gelecek videolar için yer tutucu alanlar -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery-section" class="gallery-section-new">
+            <div class="photo-gallery">
+                <img src="img/screenshots/1.png" alt="Barzakh Ekran Görüntüsü 1">
+                <img src="img/screenshots/2.png" alt="Barzakh Ekran Görüntüsü 2">
+                <img src="img/screenshots/3.png" alt="Barzakh Ekran Görüntüsü 3">
+                <img src="img/screenshots/4.png" alt="Barzakh Ekran Görüntüsü 4">
+                <img src="img/screenshots/5.png" alt="Barzakh Ekran Görüntüsü 5">
+                <img src="img/screenshots/6.png" alt="Barzakh Ekran Görüntüsü 6">
+                <img src="img/screenshots/7.png" alt="Barzakh Ekran Görüntüsü 7">
+                <img src="img/screenshots/8.png" alt="Barzakh Ekran Görüntüsü 8">
+                <img src="img/screenshots/9.png" alt="Barzakh Ekran Görüntüsü 9">
+                <img src="img/screenshots/10.png" alt="Barzakh Ekran Görüntüsü 10">
+                <img src="img/screenshots/11.png" alt="Barzakh Ekran Görüntüsü 11">
+                <img src="img/screenshots/12.png" alt="Barzakh Ekran Görüntüsü 12">
+                <img src="img/screenshots/13.png" alt="Barzakh Ekran Görüntüsü 13">
+                <img src="img/screenshots/14.png" alt="Barzakh Ekran Görüntüsü 14">
+                <img src="img/screenshots/15.png" alt="Barzakh Ekran Görüntüsü 15">
+            </div>
+        </section>
+
+        <!-- Footer Info -->
+        <footer class="minimal-footer">
+            <div class="container-narrow footer-top-row">
+                <div class="footer-col">
+                    <h3>E-posta</h3>
+                    <p><a href="mailto:han23studio@gmail.com">han23studio@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Sosyal Medya</h3>
+                    <div class="social-links-footer">
+                        <a href="https://x.com/barzakhgame" target="_blank">Twitter (X)</a>
+                        <a href="https://discord.gg/J2rBFcdk4m" target="_blank">Discord</a>
+                        <a href="https://www.tiktok.com/@han23studio" target="_blank">TikTok</a>
+                        <a href="https://www.youtube.com/@han23studio" target="_blank">YouTube</a>
+                        <a href="https://www.instagram.com/han23studio/" target="_blank">Instagram</a>
+                    </div>
+                </div>
+                <div class="footer-col logo-col">
+                    <img src="img/logo/han.svg" alt="Han Logo" class="footer-logo">
+                </div>
+            </div>
+            <div class="container-narrow footer-bottom-row">
+                <a href="https://drive.google.com/drive/u/2/folders/1tqa_NLki3Ngxdoj_xxABQ6qzS2KyBMaJ" target="_blank"
+                    class="privacy-link">Basın Kiti</a>
+                <span class="footer-divider">|</span>
+                <a href="privacy.pdf" target="_blank" class="privacy-link">Gizlilik Politikası</a>
+                <span class="footer-divider">|</span>
+                <a href="https://han.emirhangungormez.com/" target="_blank" class="privacy-link">Han Interactive
+                    Entertainment</a>
+            </div>
+        </footer>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="steam-assets.js"></script>
+    <script src="script.js?v=1.1"></script>
+</body>
+
+</html>

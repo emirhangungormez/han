@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hazırlayan: Emirhan Güngörmez | İletişim: han23studio@gmail.com | Zikir: سُبْحَانَ اللّٰهِ، اَلْحَمْدُ لِلّٰهِ, اَللّٰهُ اَكْبَرُ, اَسْتَغْفِرُ اللّٰهَ -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
+  <!-- Ana Sayfa -->
+  <url>
+    <loc>https://emirhangungormez.com/</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.00</priority>
+  </url>
+  
+  <!-- İletişim Sayfası -->
+  <url>
+    <loc>https://emirhangungormez.com/iletisim.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  
+  <!-- CV -->
+  <url>
+    <loc>https://emirhangungormez.com/cv.pdf</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  
+  <!-- Proje Sayfaları -->
+  <url>
+    <loc>https://emirhangungormez.com/littleprince.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  
+  <url>
+    <loc>https://emirhangungormez.com/sablon.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  
+  <url>
+    <loc>https://emirhangungormez.com/barzakh.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  
+  <url>
+    <loc>https://emirhangungormez.com/truckup.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  
+  <!-- 404 Sayfası (SEO için dahil edilmiştir) -->
+  <url>
+    <loc>https://emirhangungormez.com/404.html</loc>
+    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.10</priority>
+  </url>
+</urlset>

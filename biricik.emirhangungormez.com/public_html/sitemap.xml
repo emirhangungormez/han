@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hazırlayan: Emirhan Güngörmez | İletişim: han23studio@gmail.com | Zikir: سُبْحَانَ اللّٰهِ، اَلْحَمْدُ لِلّٰهِ, اَللّٰهُ اَكْبَرُ, اَسْتَغْفِرُ اللّٰهَ -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://biricik.emirhangungormez.com/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://biricik.emirhangungormez.com/#content</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biricik.emirhangungormez.com/#yol-haritasi</loc>
+    <priority>0.7</priority>
+  </url>
+</urlset> 

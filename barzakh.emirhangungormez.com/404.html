@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sayfa Bulunamadı | Barzakh</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .huge-404 {
+            font-size: clamp(100px, 25vw, 300px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -5px;
+            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            user-select: none;
+        }
+
+        .error-content {
+            text-align: center;
+        }
+
+        .error-content h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .error-content p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+
+        .back-home-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-home-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Video -->
+    <div class="video-bg-container">
+        <video src="video/background.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="content-wrapper">
+        <header class="container-narrow header-nav" style="padding-top: 40px;">
+            <div class="studio-logo">
+                <img src="img/logo/han.svg" alt="Han Interactive Logo">
+            </div>
+            <div class="game-logo">
+                <img src="img/logo/logo.svg" alt="Barzakh Logosu">
+            </div>
+        </header>
+
+        <section class="error-hero">
+            <div class="huge-404">404</div>
+            <div class="error-content">
+                <h1>Kayıp Bir Evren</h1>
+                <p>Aradığınız sayfa Berzah'ın derinliklerinde kaybolmuş olabilir.</p>
+                <a href="index.html" class="back-home-btn">Geri Dön</a>
+            </div>
+        </section>
+
+        <!-- Minimal Footer -->
+        <footer class="minimal-footer">
+            <div class="container-narrow footer-top-row">
+                <div class="footer-col">
+                    <h3>E-posta</h3>
+                    <p><a href="mailto:han23studio@gmail.com">han23studio@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Sosyal Medya</h3>
+                    <div class="social-links-footer">
+                        <a href="https://x.com/barzakhgame" target="_blank">Twitter (X)</a>
+                        <a href="https://discord.gg/J2rBFcdk4m" target="_blank">Discord</a>
+                        <a href="https://www.tiktok.com/@han23studio" target="_blank">TikTok</a>
+                        <a href="https://www.youtube.com/@han23studio" target="_blank">YouTube</a>
+                        <a href="https://www.instagram.com/han23studio/" target="_blank">Instagram</a>
+                    </div>
+                </div>
+                <div class="footer-col logo-col">
+                    <img src="img/logo/han.svg" alt="Han Logo" class="footer-logo">
+                </div>
+            </div>
+            <div class="container-narrow footer-bottom-row" style="padding-bottom: 40px;">
+                <a href="https://drive.google.com/drive/u/2/folders/1tqa_NLki3Ngxdoj_xxABQ6qzS2KyBMaJ" target="_blank"
+                    class="privacy-link">Basın Kiti</a>
+                <span class="footer-divider">|</span>
+                <a href="privacy.pdf" target="_blank" class="privacy-link">Gizlilik Politikası</a>
+                <span class="footer-divider">|</span>
+                <a href="https://han.emirhangungormez.com/" target="_blank" class="privacy-link">Han Interactive
+                    Entertainment</a>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
