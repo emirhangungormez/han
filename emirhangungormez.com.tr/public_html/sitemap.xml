@@ -4,61 +4,61 @@
 <!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
   <!-- Ana Sayfa -->
   <url>
-    <loc>https://emirhangungormez.com/</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
   </url>
   
   <!-- İletişim Sayfası -->
   <url>
-    <loc>https://emirhangungormez.com/iletisim.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/iletisim.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   
   <!-- CV -->
   <url>
-    <loc>https://emirhangungormez.com/cv.pdf</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/cv.pdf</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   
   <!-- Proje Sayfaları -->
   <url>
-    <loc>https://emirhangungormez.com/littleprince.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/littleprince.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   
   <url>
-    <loc>https://emirhangungormez.com/sablon.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/sablon.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   
   <url>
-    <loc>https://emirhangungormez.com/barzakh.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/barzakh.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   
   <url>
-    <loc>https://emirhangungormez.com/truckup.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/truckup.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   
   <!-- 404 Sayfası (SEO için dahil edilmiştir) -->
   <url>
-    <loc>https://emirhangungormez.com/404.html</loc>
-    <lastmod>2024-04-26T04:37:00+00:00</lastmod>
+    <loc>https://emirhangungormez.com.tr/404.html</loc>
+    <lastmod>2026-05-31T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.10</priority>
   </url>
