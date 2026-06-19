@@ -1,0 +1,17 @@
+{
+  "name": "HAN Interactive Entertainment",
+  "short_name": "HAN",
+  "description": "Independent video games studio developing Barzakh and Truck Up, running pitch conversations, and preparing future Fab products.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#efefec",
+  "theme_color": "#efefec",
+  "icons": [
+    {
+      "src": "/img/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

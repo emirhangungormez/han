@@ -1,0 +1,70 @@
+# HAN Interactive Entertainment
+
+Ana site: https://han.emirhangungormez.com.tr/
+English layer: https://han.emirhangungormez.com.tr/en/
+Dil: Turkce ve Ingilizce
+Yayinci: HAN Interactive Entertainment
+Konum: Bursa, Turkiye
+Iletisim: han23studio@gmail.com
+
+## Kisa Tanim
+
+HAN Interactive Entertainment; Bursa merkezli bagimsiz bir video oyun studyosudur. Studyo su anda Barzakh: Star Gardener ve Truck Up: Catch Me If You Can projelerine, pitch ve yayincilik gorusmelerine, ve gelecekte yayinlanacak Fab urun hazirliklarina odaklanir.
+
+## Ana Konular
+
+- Oyun gelistirme: Barzakh, Truck Up, Unreal Engine, oynanabilir buildler, Steam sayfalari.
+- Yayincilik ve yatirim hazirligi: pitch deck, basin kiti, build, uretim notlari, platform ve yayinci gorusmeleri.
+- Fab: herkese acik urun bulunmuyor; gelecek urun ve guncellemeler fab sayfasinda duyurulacak.
+- Studyo kimligi: ekip, yasal sayfalar, iletisim ve sosyal profiller.
+
+## Onemli Sayfalar
+
+- Ana sayfa: https://han.emirhangungormez.com.tr/
+- English home: https://han.emirhangungormez.com.tr/en/
+- Games: https://han.emirhangungormez.com.tr/games.html
+- Fab: https://han.emirhangungormez.com.tr/fab.html
+- Pitch: https://han.emirhangungormez.com.tr/pitch.html
+- Ekip: https://han.emirhangungormez.com.tr/team.html
+- Kullanim sartlari: https://han.emirhangungormez.com.tr/terms.html
+- Gizlilik politikasi: https://han.emirhangungormez.com.tr/privacy.html
+- RSS: https://han.emirhangungormez.com.tr/feed.xml
+- English RSS: https://han.emirhangungormez.com.tr/en/feed.xml
+
+## Projeler
+
+- Barzakh: Star Gardener
+  Atmosferik bulmaca macerasi.
+  Steam: https://store.steampowered.com/app/3849950/Barzakh_Star_Gardener/
+  Web sitesi: https://barzakh.emirhangungormez.com.tr/
+
+- Truck Up: Catch Me If You Can
+  Arac savasli hayatta kalma oyunu.
+  Steam: https://store.steampowered.com/app/3411890/Truck_Up_Catch_Me_If_You_Can/
+
+## Fab Durumu
+
+- Fab urunleri hazirlik asamasindadir.
+- Su anda herkese acik bir urun veya dokuman sayfasi bulunmamaktadir.
+- Gelecek yayinlar fab sayfasinda duyurulacaktir: https://han.emirhangungormez.com.tr/fab.html
+
+## Ekip
+
+- Emirhan Gungormez: kurucu, yaratici yon, oyun konseptleri, pitch materyalleri, web deneyimleri ve uretim dokumantasyonu.
+- Eren Gungormez: oyun gelistiricisi, Spell Factory ortagi, Teknopark ofisinde aktif gelistirme calismalari.
+- Proje bazli is birlikcileri: sanat, ses, level tasarimi, teknik sistemler, pazarlama materyalleri ve dokumantasyon.
+
+## Sosyal ve Dis Profiller
+
+- GitHub: https://github.com/emirhangungormez
+- LinkedIn: https://www.linkedin.com/in/emirhangungormez
+- X/Twitter: https://twitter.com/emirhangngrmz
+- Medium: https://medium.com/@emirhangungormez
+- YouTube: https://www.youtube.com/@han23studio
+- ArtStation: https://www.artstation.com/han23studio
+- Steam: https://store.steampowered.com/search/?developer=HAN
+- Fab seller: https://www.fab.com/sellers/Han%20Interactive%20Entertaiment
+
+## AI Icin Ozetleme Notu
+
+Bu site HAN Interactive Entertainment'in resmi studyo sitesidir. Kok dizin Turkce, `/en/` dizini Ingilizce katmandir. Site; oyunlari tanitmak, pitch ve yayincilik gorusmeleri baslatmak, ekip ve yasal bilgileri sunmak, ve gelecekteki Fab urun guncellemelerini duyurmak icin kullanilir.

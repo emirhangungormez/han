@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://han.emirhangungormez.com.tr/sitemap.xml
+# RSS: https://han.emirhangungormez.com.tr/feed.xml
+# English RSS: https://han.emirhangungormez.com.tr/en/feed.xml
+# LLM context: https://han.emirhangungormez.com.tr/llms.txt
