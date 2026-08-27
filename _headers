@@ -1,0 +1,41 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  X-Robots-Tag: index, follow
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=3600
+
+/*.css
+  Cache-Control: public, max-age=604800
+
+/*.js
+  Cache-Control: public, max-age=604800
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/en/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/site.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=86400

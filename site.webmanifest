@@ -1,0 +1,17 @@
+{
+  "name": "HAN",
+  "short_name": "HAN",
+  "description": "Independent video games studio and real-time 3D graphics technology creator.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#14120b",
+  "theme_color": "#14120b",
+  "icons": [
+    {
+      "src": "/img/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

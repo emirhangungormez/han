@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Blueprint Kodlayıcı &amp; Playground — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine'den kopyaladığınız Blueprint node kodlarını yapıştırarak anında interaktif görsel grafiklere dönüştürün.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+    <style>
+        .sandbox-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.25rem 0 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .sandbox-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-subtle, rgba(255, 255, 255, 0.02));
+            border-bottom: 1px solid var(--border-color);
+        }
+        .sandbox-presets {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .sandbox-presets-label {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin-right: 2px;
+        }
+        .sandbox-preset-btn {
+            background: var(--bg-muted);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            font-size: 0.76rem;
+            border-radius: 5px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.12s ease;
+            font-family: inherit;
+        }
+        .sandbox-preset-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+        .sandbox-preset-btn.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+        #btn-render-custom {
+            background: var(--btn-primary-bg) !important;
+            color: var(--btn-primary-text) !important;
+            border: 1px solid var(--btn-primary-bg) !important;
+            border-radius: 6px;
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+            font-family: inherit;
+        }
+        #btn-render-custom:hover {
+            opacity: 0.88;
+        }
+        .sandbox-input {
+            width: 100%;
+            height: 130px;
+            background: var(--bg-code);
+            border: none;
+            border-radius: 0;
+            color: var(--text-primary);
+            font-family: var(--font-mono, monospace);
+            font-size: 0.8rem;
+            padding: 12px 14px;
+            resize: vertical;
+            outline: none;
+            line-height: 1.5;
+            display: block;
+            box-sizing: border-box;
+        }
+        .sandbox-input:focus {
+            background: var(--bg-code);
+        }
+        #sandbox-output .ue-bp-container {
+            margin: 0.5rem 0 1rem 0 !important;
+        }
+        .sandbox-section-title {
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+        <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <!-- Section 1: Dokümantasyon -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Dokümantasyon</div>
+                    <a href="/docs/tr/" class="docs-sidebar-link">Giriş</a>
+                    <a href="/docs/tr/intro/" class="docs-sidebar-link">Stüdyo &amp; Vizyon</a>
+                    <a href="/docs/tr/support/" class="docs-sidebar-link">Destek &amp; İletişim</a>
+                </div>
+
+                <!-- Section 2: YouTube Serileri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">YouTube Serileri</div>
+                    <div class="docs-sidebar-folder">
+                        <div class="docs-sidebar-folder-title">
+                            <span>100 Temel Blueprint Node</span>
+                        </div>
+                        <div class="docs-sidebar-nested">
+                            <a href="/docs/tr/blueprint/" class="docs-sidebar-link">Genel Bakış (İndeks)</a>
+                            <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch</a>
+                            <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence</a>
+                            <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link active">Blueprint Kodlayıcı</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Fab Ürünleri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Fab Ürünleri</div>
+                    <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Fab Mağazası</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-muted); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Yakında</span>
+                    </a>
+                </div>
+            </div>
+                                <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/sandbox/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/">Blueprint</a>
+                    <span>/</span>
+                    <span>Blueprint Kodlayıcı</span>
+                </div>
+
+                <h1 id="playground" class="docs-title">Blueprint Kodlayıcı</h1>
+                <p class="docs-lead">
+                    Unreal Engine editöründen kopyaladığınız Blueprint metnini yapıştırarak tarayıcıda canlı görsel grafiğe dönüştürün.
+                </p>
+
+                <h2 id="kod-girisi" class="sandbox-section-title">Blueprint Kodu Girişi</h2>
+                <div class="sandbox-card">
+                    <div class="sandbox-toolbar">
+                        <div class="sandbox-presets">
+                            <span class="sandbox-presets-label">Örnekler:</span>
+                            <button type="button" class="sandbox-preset-btn active" data-preset="branch">Branch &amp; Print</button>
+                            <button type="button" class="sandbox-preset-btn" data-preset="linetrace">Line Trace</button>
+                            <button type="button" class="sandbox-preset-btn" data-preset="timer">Timer &amp; Event</button>
+                            <button type="button" class="sandbox-preset-btn" data-preset="spawn">Spawn Actor</button>
+                        </div>
+                        <button type="button" id="btn-render-custom">
+                            Grafiği Oluştur
+                        </button>
+                    </div>
+                    <textarea id="sandbox-textarea" class="sandbox-input" placeholder="Unreal Engine'den kopyalanmış metni buraya yapıştırın (Begin Object Class=...)..."></textarea>
+                </div>
+
+                <h2 id="grafik-onizleme" class="sandbox-section-title">İnteraktif Grafik Önizleme</h2>
+                <div id="sandbox-output"></div>
+            </article>
+        </main>
+
+        <!-- Table of Contents (Right) -->
+        <aside class="docs-toc">
+            <div class="docs-toc-title">Bu Sayfada</div>
+            <ul class="docs-toc-list">
+                <li><a href="#playground" class="docs-toc-link active">Blueprint Kodlayıcı</a></li>
+                <li><a href="#kod-girisi" class="docs-toc-link">Blueprint Kodu Girişi</a></li>
+                <li><a href="#grafik-onizleme" class="docs-toc-link">İnteraktif Grafik Önizleme</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Bu Sayfayı Kopyala">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Bu Sayfayı Kopyala</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+    <script>
+        const PRESETS = {
+            branch: `Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_0"
+   EventReference=(MemberParent=Class'"/Script/Engine.Actor"',MemberName="ReceiveBeginPlay")
+   bOverrideFunction=true
+   NodePosX=80
+   NodePosY=100
+   CustomProperties Pin (PinId=A1,PinName="OutputDelegate",PinType.PinCategory="delegate",Direction="EGPD_Output")
+   CustomProperties Pin (PinId=A2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_IfThenElse_0 B1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_IfThenElse Name="K2Node_IfThenElse_0"
+   NodePosX=320
+   NodePosY=100
+   CustomProperties Pin (PinId=B1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_Event_0 A2))
+   CustomProperties Pin (PinId=B2,PinName="Condition",PinType.PinCategory="bool",DefaultValue="true")
+   CustomProperties Pin (PinId=B3,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_0 C1))
+   CustomProperties Pin (PinId=B4,PinName="else",Direction="EGPD_Output",PinType.PinCategory="exec")
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_0"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="PrintString")
+   NodePosX=560
+   NodePosY=100
+   CustomProperties Pin (PinId=C1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_IfThenElse_0 B3))
+   CustomProperties Pin (PinId=C2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=C3,PinName="inString",PinType.PinCategory="string",DefaultValue="Health > 0 - Player Alive")
+End Object`,
+
+            linetrace: `Begin Object Class=/Script/BlueprintGraph.K2Node_CustomEvent Name="K2Node_CustomEvent_0"
+   CustomFunctionName="PerformWeaponRaycast"
+   NodePosX=60
+   NodePosY=120
+   CustomProperties Pin (PinId=CE1,PinName="OutputDelegate",PinType.PinCategory="delegate",Direction="EGPD_Output")
+   CustomProperties Pin (PinId=CE2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_1 LT1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_1"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="LineTraceSingle")
+   NodePosX=340
+   NodePosY=120
+   CustomProperties Pin (PinId=LT1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CustomEvent_0 CE2))
+   CustomProperties Pin (PinId=LT2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_IfThenElse_1 BR1))
+   CustomProperties Pin (PinId=LT3,PinName="Start",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/CoreUObject.Vector"')
+   CustomProperties Pin (PinId=LT4,PinName="End",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/CoreUObject.Vector"')
+   CustomProperties Pin (PinId=LT5,PinName="TraceChannel",PinType.PinCategory="byte",DefaultValue="ECC_Visibility")
+   CustomProperties Pin (PinId=LT6,PinName="OutHit",Direction="EGPD_Output",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/Engine.HitResult"')
+   CustomProperties Pin (PinId=LT7,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="bool",LinkedTo=(K2Node_IfThenElse_1 BR2))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_IfThenElse Name="K2Node_IfThenElse_1"
+   NodePosX=640
+   NodePosY=120
+   CustomProperties Pin (PinId=BR1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_1 LT2))
+   CustomProperties Pin (PinId=BR2,PinName="Condition",PinType.PinCategory="bool",LinkedTo=(K2Node_CallFunction_1 LT7))
+   CustomProperties Pin (PinId=BR3,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=BR4,PinName="else",Direction="EGPD_Output",PinType.PinCategory="exec")
+End Object`,
+
+            timer: `Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_Timer"
+   EventReference=(MemberParent=Class'"/Script/Engine.Actor"',MemberName="ReceiveBeginPlay")
+   bOverrideFunction=true
+   NodePosX=60
+   NodePosY=100
+   CustomProperties Pin (PinId=EV1,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_Timer T1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_Timer"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="K2_SetTimerDelegate")
+   NodePosX=300
+   NodePosY=100
+   CustomProperties Pin (PinId=T1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_Event_Timer EV1))
+   CustomProperties Pin (PinId=T2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=T3,PinName="Delegate",PinType.PinCategory="delegate",LinkedTo=(K2Node_CustomEvent_Tick D1))
+   CustomProperties Pin (PinId=T4,PinName="Time",PinType.PinCategory="real",DefaultValue="1.000000")
+   CustomProperties Pin (PinId=T5,PinName="bLooping",PinType.PinCategory="bool",DefaultValue="true")
+   CustomProperties Pin (PinId=T6,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/Engine.TimerHandle"')
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CustomEvent Name="K2Node_CustomEvent_Tick"
+   CustomFunctionName="OnEverySecondTick"
+   NodePosX=60
+   NodePosY=280
+   CustomProperties Pin (PinId=D1,PinName="OutputDelegate",PinType.PinCategory="delegate",Direction="EGPD_Output",LinkedTo=(K2Node_CallFunction_Timer T3))
+   CustomProperties Pin (PinId=D2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+End Object`,
+
+            spawn: `Begin Object Class=/Script/BlueprintGraph.K2Node_CustomEvent Name="K2Node_CustomEvent_Spawn"
+   CustomFunctionName="SpawnProjectile"
+   NodePosX=60
+   NodePosY=120
+   CustomProperties Pin (PinId=SP1,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_SpawnActorFromClass_0 SA1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_SpawnActorFromClass Name="K2Node_SpawnActorFromClass_0"
+   NodePosX=320
+   NodePosY=120
+   CustomProperties Pin (PinId=SA1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CustomEvent_Spawn SP1))
+   CustomProperties Pin (PinId=SA2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=SA3,PinName="Class",PinType.PinCategory="class",PinSubCategoryObject=Class'"/Script/Engine.Actor"')
+   CustomProperties Pin (PinId=SA4,PinName="SpawnTransform",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/CoreUObject.Transform"')
+   CustomProperties Pin (PinId=SA5,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="object",PinSubCategoryObject=Class'"/Script/Engine.Actor"')
+End Object`
+        };
+
+        const textarea = document.getElementById('sandbox-textarea');
+        const output = document.getElementById('sandbox-output');
+        const renderBtn = document.getElementById('btn-render-custom');
+
+        function renderBlueprint(text, title = 'Canlı Blueprint Önizleme') {
+            output.innerHTML = '';
+            const container = document.createElement('div');
+            container.setAttribute('data-ue-blueprint', 'true');
+            container.setAttribute('data-title', title);
+            const script = document.createElement('script');
+            script.type = 'text/plain';
+            script.textContent = text;
+            container.appendChild(script);
+            output.appendChild(container);
+
+            if (window.HANBlueprintUE) {
+                window.HANBlueprintUE.init();
+            }
+        }
+
+        // Preset buttons
+        const presetBtns = document.querySelectorAll('.sandbox-preset-btn');
+        presetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                presetBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const presetKey = btn.getAttribute('data-preset');
+                if (PRESETS[presetKey]) {
+                    textarea.value = PRESETS[presetKey];
+                    renderBlueprint(textarea.value, btn.textContent);
+                }
+            });
+        });
+
+        renderBtn.addEventListener('click', () => {
+            const val = textarea.value.trim();
+            if (val) {
+                presetBtns.forEach(b => b.classList.remove('active'));
+                renderBlueprint(val, 'Özel Blueprint Grafiği');
+            }
+        });
+
+        // Initialize with default
+        window.addEventListener('load', () => {
+            textarea.value = PRESETS.branch;
+            renderBlueprint(PRESETS.branch, 'Branch & Print String');
+        });
+    </script>
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

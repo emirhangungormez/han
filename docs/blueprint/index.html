@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Essential Blueprint Nodes (Unreal Engine 5) — HAN Documentation</title>
+    <meta name="description" content="Comprehensive reference guide for 100 essential Unreal Engine 5 Blueprint nodes. Interactive visual node graphs, copyable UE clipboard codes, and YouTube video series.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+    <style>
+        .bp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0 35px;
+        }
+        .bp-card {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s ease;
+        }
+        .bp-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+        .bp-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .bp-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .bp-tag.flow { background: #334155; color: #fff; }
+        .bp-tag.event { background: #991b1b; color: #fff; }
+        .bp-tag.actor { background: #0284c7; color: #fff; }
+        .bp-tag.timer { background: #0f766e; color: #fff; }
+        .bp-tag.collision { background: #d97706; color: #fff; }
+        
+        .bp-card-title {
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+        .bp-card-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            flex: 1;
+        }
+        .bp-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .bp-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .bp-search-box {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/" class="docs-nav-link active">Documentation</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Store</a>
+                <a href="/docs/support/" class="docs-nav-link">Support</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Search documentation">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Search documentation...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Store</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Toggle Menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <!-- Section 1: Documentation -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Documentation</div>
+                    <a href="/docs/" class="docs-sidebar-link">Welcome</a>
+                    <a href="/docs/intro/" class="docs-sidebar-link">Introduction</a>
+                    <a href="/docs/support/" class="docs-sidebar-link">Support &amp; Inquiries</a>
+                </div>
+
+                <!-- Section 2: YouTube Series -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">YouTube Series</div>
+                    <div class="docs-sidebar-folder">
+                        <div class="docs-sidebar-folder-title">
+                            <span>100 Blueprint Nodes</span>
+                        </div>
+                        <div class="docs-sidebar-nested">
+                            <a href="/docs/blueprint/" class="docs-sidebar-link active">Overview (Index)</a>
+                            <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch</a>
+                            <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence</a>
+                            <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">Live Visualizer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Fab Products -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Fab Products</div>
+                    <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Fab Store</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-muted); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Soon</span>
+                    </a>
+                </div>
+            </div>
+
+                                    <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Theme selector">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="System">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Light">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>English</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option active"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/" class="docs-lang-option"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/">Docs</a>
+                    <span>/</span>
+                    <span>100 Essential Blueprint Nodes</span>
+                </div>
+
+                <h1 id="blueprint-hub" class="docs-title">100 Essential Blueprint Nodes</h1>
+                <p class="docs-lead">
+                    Companion reference directory for our YouTube series covering 100 essential Unreal Engine 5 Blueprint nodes with practical game development scenarios, pin analysis, and video walkthroughs.
+                </p>
+
+                <div style="margin: 25px 0 25px;">
+                    <input type="text" id="bp-filter" class="bp-search-box" placeholder="Filter lessons and nodes (Branch, Sequence, Timer)...">
+                </div>
+
+                <!-- Lessons & Node Cards Grid -->
+                <h2 id="cat-flow">Lesson Directory</h2>
+                <div class="bp-grid">
+                    <a href="/docs/tr/blueprint/flow-control/branch/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Flow Control</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">#01</span>
+                        </div>
+                        <div class="bp-card-title">01. Branch (Condition Branch)</div>
+                        <div class="bp-card-desc">Evaluates a Boolean condition and directs execution flow into True or False branches.</div>
+                    </a>
+
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Flow Control</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">#02</span>
+                        </div>
+                        <div class="bp-card-title">02. Sequence (Sequential Execution)</div>
+                        <div class="bp-card-desc">Executes multiple operations in order within the same frame on a single execution trigger.</div>
+                    </a>
+
+                    <a href="/docs/tr/blueprint/sandbox/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Tool</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">Playground</span>
+                        </div>
+                        <div class="bp-card-title">Blueprint Encoder &amp; Visualizer</div>
+                        <div class="bp-card-desc">Test and visualize nodes copied directly from the Unreal Engine editor in your browser.</div>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <!-- Table of Contents (Right) -->
+        <aside class="docs-toc">
+            <div class="docs-toc-title">On this page</div>
+            <ul class="docs-toc-list">
+                <li><a href="#blueprint-hub" class="docs-toc-link active">100 Essential Blueprint Nodes</a></li>
+                <li><a href="#cat-flow" class="docs-toc-link">Lesson Directory</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Copy Page Link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Copy Page Link</span>
+                </button>
+            </div>
+        </aside>
+                <li><a href="#overview" class="docs-toc-link">Series Overview</a></li>
+                <li><a href="#interactive-preview" class="docs-toc-link">Interactive Engine</a></li>
+                <li><a href="#featured-nodes" class="docs-toc-link">Featured Nodes</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Copy page URL">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Copy Link</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

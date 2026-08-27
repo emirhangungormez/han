@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Turkish Home & Core Pages -->
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/en/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/en/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- English Documentation Pages -->
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/intro/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/intro/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/intro/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/support/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/support/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/support/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/fab/getting-started/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/getting-started/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/getting-started/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/fab/unreal-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/unreal-engine/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/unreal-engine/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/fab/unity/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/unity/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/unity/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/fab/optimization/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/optimization/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/optimization/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Turkish Documentation Pages -->
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/intro/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/intro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/intro/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/support/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/support/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/support/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/fab/getting-started/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/getting-started/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/getting-started/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/fab/unreal-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/unreal-engine/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/unreal-engine/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/fab/unity/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/unity/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/unity/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://han.emirhangungormez.com.tr/docs/tr/fab/optimization/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/fab/optimization/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/fab/optimization/" />
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+</urlset>

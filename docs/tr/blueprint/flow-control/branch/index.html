@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch (Koşul Dalı) Node Rehberi — 100 Blueprint Node #01 — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine 5 Branch node'u detaylı anlatımı. C++ karşılığı, pin tanımları, interaktif blueprint grafiği, kopyalanabilir UE kodu ve YouTube ders videosu.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <!-- Section 1: Dokümantasyon -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Dokümantasyon</div>
+                    <a href="/docs/tr/" class="docs-sidebar-link">Giriş</a>
+                    <a href="/docs/tr/intro/" class="docs-sidebar-link">Stüdyo &amp; Vizyon</a>
+                    <a href="/docs/tr/support/" class="docs-sidebar-link">Destek &amp; İletişim</a>
+                </div>
+
+                <!-- Section 2: YouTube Serileri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">YouTube Serileri</div>
+                    <div class="docs-sidebar-folder">
+                        <div class="docs-sidebar-folder-title">
+                            <span>100 Temel Blueprint Node</span>
+                        </div>
+                        <div class="docs-sidebar-nested">
+                            <a href="/docs/tr/blueprint/" class="docs-sidebar-link">Genel Bakış (İndeks)</a>
+                            <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link active">01. Branch</a>
+                            <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence</a>
+                            <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">Blueprint Kodlayıcı</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Fab Ürünleri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Fab Ürünleri</div>
+                    <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Fab Mağazası</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-muted); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Yakında</span>
+                    </a>
+                </div>
+            </div>
+                                <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/">100 Temel Blueprint Node</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/#cat-flow">Akış Kontrolü</a>
+                    <span>/</span>
+                    <span>Branch</span>
+                </div>
+
+                <h1 id="branch" class="docs-title">Branch (Koşul Dalı)</h1>
+                <p class="docs-lead">
+                    Unreal Engine programlamanın en temel karar mekanizmasıdır. Kendisine iletilen Boolean (True / False) değerini değerlendirerek oyunun yürütme akışını iki farklı yoldan birine yönlendirir.
+                </p>
+
+                <!-- Metadata badges -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
+                    <span style="background: var(--bg-muted); color: var(--text-primary); font-size: 0.75rem; font-weight: 450; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Kategori: Flow Control</span>
+                    <span style="background: var(--bg-muted); color: var(--text-primary); font-size: 0.75rem; font-weight: 450; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Zorluk: Başlangıç</span>
+                    <span style="background: var(--bg-muted); color: var(--text-secondary); font-size: 0.75rem; font-family: var(--font-mono); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">C++: if (Condition) { ... } else { ... }</span>
+                </div>
+
+                <!-- Video Showcase -->
+                <h2 id="video-lesson">YouTube Video Dersi (#01)</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube-nocookie.com/embed/R1vvp-JH_1U" title="100 Temel Blueprint Node'u — #01 Branch (Koşul Dalı)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <!-- Interactive Blueprint Visualizer -->
+                <h2 id="interactive-graph">İnteraktif Blueprint Grafiği &amp; Kopyalanabilir Kod</h2>
+                <p>
+                    Aşağıdaki grafikteki node'ları sağ üstteki "Copy Nodes" butonuna basarak kopyalayabilir ve doğrudan Unreal Engine 5 editörünüzde Blueprint Graph içerisine <code>Ctrl+V</code> ile yapıştırabilirsiniz:
+                </p>
+
+                <div data-ue-blueprint data-title="Branch: Değişken Karşılaştırma &amp; Akış Yönlendirme (Name == Hasan)">
+                    <script type="text/plain">
+Begin Object Class=/Script/BlueprintGraph.K2Node_IfThenElse Name="K2Node_IfThenElse_0" ExportPath="/Script/BlueprintGraph.K2Node_IfThenElse'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_IfThenElse_0'"
+   NodePosX=416
+   NodePosY=16
+   NodeGuid=90E2EED14133D6BC8A577FB9D47E66B2
+   CustomProperties Pin (PinId=52E69C2A470F5CC77CE93AA8E6134915,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=8FA8D8DA4D6C2A235D0781A20BE0BC14,PinName="Condition",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",LinkedTo=(K2Node_PromotableOperator_3 0DDB68BF476DCA6BE532C48E0F133100,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=03DC7B6C4556DD32AEAA1D93894795A5,PinName="then",PinFriendlyName=NSLOCTEXT("K2Node", "true", "true"),Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_10 5D2B50BC4213B62E33EDC1A1200A8397,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=1DF17E74433E4267A03B0EAA48E39C17,PinName="else",PinFriendlyName=NSLOCTEXT("K2Node", "false", "false"),Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_9 5D2B50BC4213B62E33EDC1A1200A8397,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableGet Name="K2Node_VariableGet_3" ExportPath="/Script/BlueprintGraph.K2Node_VariableGet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableGet_3'"
+   VariableReference=(MemberName="Name",MemberGuid=EA70D86746D8905846AF69BF3C6C5DF8,bSelfContext=True)
+   NodePosX=432
+   NodePosY=224
+   NodeGuid=BE5A5A52435FB6623E115387A51018DB
+   CustomProperties Pin (PinId=666E1E9146D4D7DD43218FA6596AB9DF,PinName="Name",Direction="EGPD_Output",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="None",AutogeneratedDefaultValue="None",LinkedTo=(K2Node_PromotableOperator_3 BD2A404141DB5773646C48B02C33BD66,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=8087B13B4B4680273B4C54BF4EA1B611,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_PromotableOperator Name="K2Node_PromotableOperator_3" ExportPath="/Script/BlueprintGraph.K2Node_PromotableOperator'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_PromotableOperator_3'"
+   OperationName="EqualEqual"
+   bDefaultsToPureFunc=True
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetMathLibrary'",MemberName="EqualEqual_NameName")
+   NodePosX=416
+   NodePosY=128
+   NodeGuid=480572B6482EA5EDEBAABF9BE9735301
+   CustomProperties Pin (PinId=BD2A404141DB5773646C48B02C33BD66,PinName="A",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableGet_3 666E1E9146D4D7DD43218FA6596AB9DF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=D7502E4F474E55BF3E3C8383EE49D616,PinName="B",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="Hasan",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=0DDB68BF476DCA6BE532C48E0F133100,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_IfThenElse_0 8FA8D8DA4D6C2A235D0781A20BE0BC14,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=90B5CB8C4CBD1FD1ADFC0EAFE8D214D4,PinName="ErrorTolerance",PinType.PinCategory="",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_10" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_CallFunction_10'"
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",MemberName="PrintString")
+   NodePosX=704
+   NodePosY=-96
+   AdvancedPinDisplay=Hidden
+   EnabledState=DevelopmentOnly
+   NodeGuid=F14DE09E455DE3E99659F7B38856167E
+   CustomProperties Pin (PinId=5D2B50BC4213B62E33EDC1A1200A8397,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_IfThenElse_0 03DC7B6C4556DD32AEAA1D93894795A5,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=A1DB65FD47B862A97454A898C55EFC97,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=1BD057C84B358E3134DE6E94DB0588A1,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultObject="/Script/Engine.Default__KismetSystemLibrary",PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=70E3E1F94B59E098EF2DCF9616A3A310,PinName="WorldContextObject",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/CoreUObject.Object'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=CC353EE14847E2A31B52FDB9E537556F,PinName="InString",PinType.PinCategory="string",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="Evet, o Emir",AutogeneratedDefaultValue="Hello",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=0338760F4B846107F7E31E8D04ADAF2D,PinName="bPrintToScreen",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=9134A7384CE2F1A4128362B756E773CF,PinName="bPrintToLog",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=E7AA3AD44C4F8060C97B05A339710BB0,PinName="TextColor",PinType.PinCategory="struct",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.ScriptStruct'/Script/CoreUObject.LinearColor'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",AutogeneratedDefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=DB258E684B7F36CB9E7CFFB5BA34A880,PinName="Duration",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="2.000000",AutogeneratedDefaultValue="2.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=05310A13454695BE614D2A893F5FBE24,PinName="Key",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="None",AutogeneratedDefaultValue="None",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_9" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_CallFunction_9'"
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",MemberName="PrintString")
+   NodePosX=704
+   NodePosY=96
+   AdvancedPinDisplay=Hidden
+   EnabledState=DevelopmentOnly
+   NodeGuid=1E66A8BE44A360129EFB57984301275C
+   CustomProperties Pin (PinId=5D2B50BC4213B62E33EDC1A1200A8397,PinName="execute",PinToolTip="\nExec",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_IfThenElse_0 1DF17E74433E4267A03B0EAA48E39C17,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=A1DB65FD47B862A97454A898C55EFC97,PinName="then",PinToolTip="\nExec",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=1BD057C84B358E3134DE6E94DB0588A1,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinToolTip="Target\nKismet System Library Object Reference",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultObject="/Script/Engine.Default__KismetSystemLibrary",PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=70E3E1F94B59E098EF2DCF9616A3A310,PinName="WorldContextObject",PinToolTip="World Context Object\nObject Reference",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/CoreUObject.Object'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=CC353EE14847E2A31B52FDB9E537556F,PinName="InString",PinToolTip="In String\nString\n\nThe string to log out",PinType.PinCategory="string",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="Hayır, o Emir değil",AutogeneratedDefaultValue="Hello",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=0338760F4B846107F7E31E8D04ADAF2D,PinName="bPrintToScreen",PinToolTip="Print to Screen\nBoolean\n\nWhether or not to print the output to the screen",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=9134A7384CE2F1A4128362B756E773CF,PinName="bPrintToLog",PinToolTip="Print to Log\nBoolean\n\nWhether or not to print the output to the log",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=E7AA3AD44C4F8060C97B05A339710BB0,PinName="TextColor",PinToolTip="Text Color\nLinear Color Structure\n\nThe color of the text to display",PinType.PinCategory="struct",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.ScriptStruct'/Script/CoreUObject.LinearColor'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",AutogeneratedDefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=DB258E684B7F36CB9E7CFFB5BA34A880,PinName="Duration",PinToolTip="Duration\nFloat (single-precision)\n\nThe display duration (if Print to Screen is True). Using negative number will result in loading the duration time from the config.",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="2.000000",AutogeneratedDefaultValue="2.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=05310A13454695BE614D2A893F5FBE24,PinName="Key",PinToolTip="Key\nName\n\nIf a non-empty key is provided, the message will replace any existing on-screen messages with the same key.",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="None",AutogeneratedDefaultValue="None",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+End Object
+                    </script>
+                </div>
+
+                <!-- Pin Breakdown -->
+                <h2 id="pin-breakdown">Giriş ve Çıkış Pinleri</h2>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="background: var(--bg-hover); text-align: left;">
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Pin Adı</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Yön</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Veri Tipi</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>(Exec In)</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #38bdf8;">Giriş</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Koşul kontrolünü başlatan yürütme sinyali.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>Condition</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #38bdf8;">Giriş</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #dc2626;">Boolean (Kırmızı)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Değerlendirilecek mantıksal ifade (True veya False).</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>True</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #10b981;">Çıkış</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Condition değeri <code>True</code> ise tetiklenen akış.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>False</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #10b981;">Çıkış</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Condition değeri <code>False</code> ise tetiklenen akış.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Practical Game Examples -->
+                <h2 id="use-cases">Kullanım Senaryoları</h2>
+                <p>
+                    Bu derste tanımlanan <code>Name</code> değişkeni, <code>Equal (EqualEqual_NameName)</code> operatörü ile <code>"Hasan"</code> değerine eşit mi diye denetlenir. Eğer eşitse (<code>True</code>) ekrana "Evet, o Emir" yazdırılır; değilse (<code>False</code>) "Hayır, o Emir değil" mesajı basılır.
+                </p>
+                <ul>
+                    <li>Değişken / İsim Doğrulama: Oyuncu adı, NPC kimliği veya diyalog durumlarının kontrol edilmesi.</li>
+                    <li>Can &amp; Ölüm Kontrolü: <code>Health &lt;= 0</code> durumunda oyuncunun ölüm animasyonunu başlatmak.</li>
+                    <li>Envanter &amp; Eşya Sorgusu: Kapıyı açmadan önce oyuncunun çantasında <code>HasKey == true</code> olup olmadığını denetlemek.</li>
+                    <li>Yetki (Multiplayer Authority): Çok oyunculu mimarilerde <code>HasAuthority</code> kontrolü ile mantığı sunucu ve istemci tarafında yönlendirmek.</li>
+                </ul>
+
+                <!-- Common Mistakes -->
+                <h2 id="common-mistakes">Sık Yapılan Hatalar</h2>
+                <ul>
+                    <li>Ağır Tick Hesaplamaları: Condition pinine her karede (Event Tick) ağır matematiksel fonksiyonlar bağlamak CPU performansını olumsuz etkiler; olay tabanlı (Event-driven) mimari tercih edilmelidir.</li>
+                    <li>Çift Tetikleme (Double Execution): True ve False kollarını kontrolsüzce aynı yürütme hattına tekrar bağlayarak fonksiyonun iki kez çalışmasına sebep olmak.</li>
+                    <li>Null / Geçersiz Nesne Kontrolü: Nesne referanslarını kontrol ederken standart Branch yerine doğrudan <code>IsValid</code> node'u kullanmak daha güvenli ve pratiktir.</li>
+                </ul>
+
+                <!-- Official Documentation -->
+                <h2 id="references">Resmi Kaynaklar</h2>
+                <ul>
+                    <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/flow-control-in-unreal-engine-blueprints" target="_blank" rel="noopener noreferrer">Unreal Engine 5 Flow Control Dokümantasyonu</a></li>
+                    <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/blueprints-visual-scripting-in-unreal-engine" target="_blank" rel="noopener noreferrer">Epic Games Blueprint Görsel Programlama Kılavuzu</a></li>
+                </ul>
+
+                <!-- Pagination -->
+                <div class="docs-pagination">
+                    <a href="/docs/tr/blueprint/" class="docs-page-nav-card">
+                        <span class="docs-page-nav-sub">Geri</span>
+                        <span class="docs-page-nav-title">← 100 Blueprint Node İndeksi</span>
+                    </a>
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-page-nav-card" style="text-align: right;">
+                        <span class="docs-page-nav-sub">Sonraki Node</span>
+                        <span class="docs-page-nav-title">02. Sequence (Sıralı Yürütme) →</span>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <aside class="docs-toc">
+            <div class="docs-toc-title">Bu Sayfada</div>
+            <ul class="docs-toc-list">
+                <li><a href="#branch" class="docs-toc-link active">Branch (Koşul Dalı)</a></li>
+                <li><a href="#video-lesson" class="docs-toc-link">YouTube Video Dersi (01)</a></li>
+                <li><a href="#interactive-graph" class="docs-toc-link">İnteraktif Blueprint Grafiği & Kopyalanabilir Kod</a></li>
+                <li><a href="#pin-breakdown" class="docs-toc-link">Giriş ve Çıkış Pinleri</a></li>
+                <li><a href="#use-cases" class="docs-toc-link">Kullanım Senaryoları</a></li>
+                <li><a href="#common-mistakes" class="docs-toc-link">Sık Yapılan Hatalar</a></li>
+                <li><a href="#references" class="docs-toc-link">Resmi Kaynaklar</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Bu Sayfayı Kopyala">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Bu Sayfayı Kopyala</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+</body>
+</html>

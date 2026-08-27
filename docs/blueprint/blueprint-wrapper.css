@@ -1,0 +1,113 @@
+/* ==========================================================================
+   HAN BLUEPRINTUE OFFICIAL RENDERER WRAPPER CSS
+   ========================================================================== */
+
+.bue-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 1.8rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: #111216;
+    overflow: hidden;
+    box-shadow: none;
+    contain: layout paint;
+}
+
+.bue-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #16171d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bue-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bue-pill {
+    background: #0284c7;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+}
+
+.bue-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f4f4f5;
+}
+
+.bue-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bue-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #2563eb;
+    border: 1px solid #1d4ed8;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.bue-copy-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: none;
+}
+
+.bue-toast {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: #10b981;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+}
+
+.bue-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Ensure BlueprintUE container fills correctly and never overflows */
+.bue-target-canvas {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative;
+    overflow: hidden !important;
+    contain: layout paint;
+}
+
+.bue-target-canvas .frame {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    border-radius: 0 0 8px 8px !important;
+}

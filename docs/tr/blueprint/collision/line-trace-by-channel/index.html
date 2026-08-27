@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Trace By Channel Node Rehberi — 100 Blueprint Node #25 — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine 5 Line Trace By Channel (Raycast) node'u detaylı anlatımı. Çarpışma kanalları, Hit Result çözme, interaktif grafik ve kopyalanabilir UE kodu.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+</head>
+<body>
+        <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <div class="docs-sidebar-group">
+                    <h3 class="docs-sidebar-title">100 Blueprint Node'u (UE5)</h3>
+                    <a href="/docs/tr/blueprint/" class="docs-sidebar-link">← Tüm Node'lar (Index)</a>
+                    <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch (Koşul Dalı)</a>
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence (Sıralı Akış)</a>
+                    <a href="/docs/tr/blueprint/timers/set-timer-by-event/" class="docs-sidebar-link">15. Set Timer by Event</a>
+                    <a href="/docs/tr/blueprint/collision/line-trace-by-channel/" class="docs-sidebar-link active">25. Line Trace By Channel</a>
+                    <a href="/docs/tr/blueprint/actor/spawn-actor-from-class/" class="docs-sidebar-link">35. SpawnActorFromClass</a>
+                    <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">⚡ Canlı Node Görselleştirici</a>
+                </div>
+            </div>
+                                <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/">100 Temel Blueprint Node</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/#cat-collision">Çarpışma &amp; Fizik</a>
+                    <span>/</span>
+                    <span>Line Trace By Channel</span>
+                </div>
+
+                <h1 class="docs-title">Line Trace By Channel (Işın Çarpışma Testi)</h1>
+                <p class="docs-lead">
+                    Oyun motorunun fizik dünyasında iki 3D koordinat (<strong>Start</strong> ve <strong>End</strong>) arasında görünmez bir ışın göndererek, belirtilen çarpışma kanalına (Collision Channel) çarpan ilk aktörü ve temas noktasını tespit eder. Silah atış mekanikleri, eşya etkileşimi ve zemin tespitinde birincil araçtır.
+                </p>
+
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <span style="background: #d97706; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px;">Kategori: Collision &amp; Raycast</span>
+                    <span style="background: #0284c7; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px;">Zorluk: Orta</span>
+                    <span style="background: #1e293b; color: #94a3b8; font-size: 0.75rem; font-family: monospace; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color);">UKismetSystemLibrary::LineTraceSingle</span>
+                </div>
+
+                <h2 id="interactive-graph">İnteraktif Blueprint Grafiği</h2>
+                <div data-ue-blueprint data-title="Line Trace ile Silah Ateşleme ve Vurulan Aktör Kontrolü">
+                    <script type="text/plain">
+Begin Object Class=/Script/BlueprintGraph.K2Node_CustomEvent Name="K2Node_CustomEvent_Fire"
+   CustomFunctionName="FireWeaponTrace"
+   NodePosX=60
+   NodePosY=120
+   CustomProperties Pin (PinId=FE1,PinName="OutputDelegate",PinType.PinCategory="delegate",Direction="EGPD_Output")
+   CustomProperties Pin (PinId=FE2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_LT LT1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_LT"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="LineTraceSingle")
+   NodePosX=320
+   NodePosY=120
+   CustomProperties Pin (PinId=LT1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CustomEvent_Fire FE2))
+   CustomProperties Pin (PinId=LT2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_IfThenElse_Hit BR1))
+   CustomProperties Pin (PinId=LT3,PinName="Start",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/CoreUObject.Vector"')
+   CustomProperties Pin (PinId=LT4,PinName="End",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/CoreUObject.Vector"')
+   CustomProperties Pin (PinId=LT5,PinName="TraceChannel",PinType.PinCategory="byte",DefaultValue="ECC_Visibility")
+   CustomProperties Pin (PinId=LT6,PinName="OutHit",Direction="EGPD_Output",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/Engine.HitResult"')
+   CustomProperties Pin (PinId=LT7,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="bool",LinkedTo=(K2Node_IfThenElse_Hit BR2))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_IfThenElse Name="K2Node_IfThenElse_Hit"
+   NodePosX=640
+   NodePosY=120
+   CustomProperties Pin (PinId=BR1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_LT LT2))
+   CustomProperties Pin (PinId=BR2,PinName="Condition",PinType.PinCategory="bool",LinkedTo=(K2Node_CallFunction_LT LT7))
+   CustomProperties Pin (PinId=BR3,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_HitMsg HM1))
+   CustomProperties Pin (PinId=BR4,PinName="else",Direction="EGPD_Output",PinType.PinCategory="exec")
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_HitMsg"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="PrintString")
+   NodePosX=920
+   NodePosY=100
+   CustomProperties Pin (PinId=HM1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_IfThenElse_Hit BR3))
+   CustomProperties Pin (PinId=HM2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=HM3,PinName="inString",PinType.PinCategory="string",DefaultValue="Hedef Basariyla Vuruldu!")
+End Object
+                    </script>
+                </div>
+
+                <h2>Kritik Pinler ve Çıktılar</h2>
+                <ul>
+                    <li><strong>Start (Vector):</strong> Işının başlayacağı dünya konumu (Örn: Namlu ucu veya kamera konumu).</li>
+                    <li><strong>End (Vector):</strong> Işının biteceği dünya konumu (Örn: <code>Camera Location + (Forward Vector * 5000)</code>).</li>
+                    <li><strong>Trace Channel (Enum):</strong> Işının hangi çarpışma kanalına tepki vereceği (<code>Visibility</code> veya <code>Camera</code>).</li>
+                    <li><strong>Out Hit (Hit Result Struct):</strong> Çarpışma gerçekleştiğinde vurulan aktör, vuruş noktası (Location), yüzey normali (Impact Normal) ve fiziksel materyal bilgilerini barındıran yapıdır (<code>Break Hit Result</code> ile açılır).</li>
+                    <li><strong>Return Value (Bool):</strong> Işın bir şeye çarptıysa <code>True</code>, boşluğa gittiyse <code>False</code> döner.</li>
+                </ul>
+
+                <div class="docs-pagination">
+                    <a href="/docs/tr/blueprint/timers/set-timer-by-event/" class="docs-page-nav-card">
+                        <span class="docs-page-nav-sub">Önceki Node</span>
+                        <span class="docs-page-nav-title">← 15. Set Timer by Event</span>
+                    </a>
+                    <a href="/docs/tr/blueprint/actor/spawn-actor-from-class/" class="docs-page-nav-card" style="text-align: right;">
+                        <span class="docs-page-nav-sub">Sonraki Node</span>
+                        <span class="docs-page-nav-title">35. SpawnActorFromClass →</span>
+                    </a>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

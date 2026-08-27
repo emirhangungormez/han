@@ -1,0 +1,450 @@
+/* ==========================================================================
+   HAN INTERACTIVE ENTERTAINMENT · SINGLE-VIEWPORT SYSTEM
+   Exact 1:1 Mobile & Desktop Layout — Clean Minimalist Typography
+   Zero Shadows, Zero Glow
+   ========================================================================== */
+
+/* Cursor Fonts */
+@font-face {
+    font-family: "CursorGothic";
+    src: url("fonts/CursorGothic_Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "CursorGothic";
+    src: url("fonts/CursorGothic_Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "CursorGothic";
+    src: url("fonts/CursorGothic_Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "berkeleyMono";
+    src: url("fonts/BerkeleyMono_Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --font-sans: "CursorGothic", "CursorGothic Fallback", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-berkeley-mono: "berkeleyMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --theme-bg: #14120b;
+    --theme-text: #f7f7f4;
+    --theme-text-muted: rgba(247, 247, 244, 0.88);
+    --grid-line-color: rgba(255, 255, 255, 0.14);
+}
+
+.cursorgothic_71ba3fd8-module__Sj65MG__variable {
+    --font-sans: "CursorGothic", "CursorGothic Fallback", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+::selection {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    font-family: var(--font-sans);
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   BACKGROUND ARTWORK & OVERLAY
+   ========================================================================== */
+.origin-bg-layer {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+    background-color: var(--theme-bg);
+}
+
+.origin-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 1;
+}
+
+@media (max-width: 767px) {
+    .origin-bg-image {
+        object-position: center 65%;
+    }
+}
+
+.origin-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(90deg, rgba(20, 18, 11, 0.82) 0%, rgba(20, 18, 11, 0.58) 45%, rgba(20, 18, 11, 0.2) 85%, rgba(20, 18, 11, 0.45) 100%),
+                radial-gradient(circle at 25% 45%, rgba(20, 18, 11, 0.2) 0%, rgba(20, 18, 11, 0.65) 100%);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   SPIRAL / ORBITAL OVERLAY CURVES
+   ========================================================================== */
+.origin-curves-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.origin-curve-solid {
+    stroke: rgba(255, 255, 255, 0.72);
+    stroke-width: 1.25px;
+    fill: none;
+    vector-effect: non-scaling-stroke;
+}
+
+.origin-curve-mobile {
+    display: none;
+}
+
+.origin-curve-desktop {
+    display: block;
+}
+
+[data-theme="light"] .origin-curve-solid {
+    stroke: rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 767px) {
+    .origin-curve-desktop {
+        display: none;
+    }
+    .origin-curve-mobile {
+        display: block;
+        stroke: rgba(255, 255, 255, 0.75);
+        stroke-width: 1.25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .origin-bg-overlay {
+        background: linear-gradient(180deg, rgba(20, 18, 11, 0.75) 0%, rgba(20, 18, 11, 0.45) 50%, rgba(20, 18, 11, 0.7) 100%);
+    }
+}
+
+/* ==========================================================================
+   MAIN GRID & VIEWPORT LAYOUT
+   ========================================================================== */
+.origin-main-grid {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .origin-main-grid {
+        display: grid;
+        grid-template-columns: minmax(32px, 16vw) repeat(3, 1fr);
+        grid-template-rows: minmax(40px, 24vh) auto 1fr;
+        padding: clamp(1rem, 2.5vw, 2rem);
+    }
+}
+
+/* Content Column */
+.origin-content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .origin-content-col {
+        grid-column: 2 / span 3;
+        grid-row: 2 / span 1;
+    }
+}
+
+@media (min-width: 1536px) {
+    .origin-content-col {
+        grid-column: 2 / span 2;
+    }
+}
+
+/* Content Wrapper */
+.origin-content-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 840px;
+    width: 100%;
+    position: relative;
+    padding: 72px 24px 24px 24px;
+}
+
+@media (min-width: 768px) {
+    .origin-content-wrap {
+        padding-top: clamp(1.5rem, 2.5vw, 2rem);
+        padding-left: clamp(1.75rem, 3vw, 2.25rem);
+        padding-right: 0;
+        padding-bottom: 0;
+    }
+}
+
+/* ==========================================================================
+   PRECISION GUIDELINES (UNBROKEN INFINITE GRID LINES)
+   ========================================================================== */
+.origin-line-v {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .origin-line-v {
+        display: block;
+        position: absolute;
+        top: -500vh;
+        bottom: -500vh;
+        height: 1000vh;
+        left: 0;
+        width: 1px;
+        background: var(--grid-line-color);
+        pointer-events: none;
+        z-index: 15;
+    }
+}
+
+.origin-line-h {
+    position: absolute;
+    top: 48px;
+    left: -50vw;
+    right: -50vw;
+    width: 200vw;
+    height: 1px;
+    background: var(--grid-line-color);
+    pointer-events: none;
+    z-index: 15;
+}
+
+@media (min-width: 768px) {
+    .origin-line-h {
+        top: 0;
+        left: -500vw;
+        right: -500vw;
+        width: 1000vw;
+    }
+}
+
+/* ==========================================================================
+   HAN BRAND LOGO
+   ========================================================================== */
+.origin-hero-logo-lockup {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    color: var(--theme-text);
+    z-index: 20;
+}
+
+@media (min-width: 768px) {
+    .origin-hero-logo-lockup {
+        margin-bottom: 1.75rem;
+    }
+}
+
+.origin-hero-han-logo-link {
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+}
+
+.origin-hero-han-logo-link:hover {
+    opacity: 0.8;
+}
+
+.origin-hero-han-logo {
+    height: 22px;
+    width: auto;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .origin-hero-han-logo {
+        height: clamp(1.35rem, 1.8vw, 1.65rem);
+    }
+}
+
+/* ==========================================================================
+   HEADLINE, DESCRIPTION & CTA LINK
+   ========================================================================== */
+.origin-hero-heading {
+    font-family: var(--font-sans);
+    font-size: clamp(2.15rem, 9.8vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: var(--theme-text);
+    margin-bottom: 20px;
+    text-wrap: balance;
+    max-width: 100%;
+    z-index: 20;
+}
+
+@media (min-width: 768px) {
+    .origin-hero-heading {
+        font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+        line-height: 1.15;
+        letter-spacing: -0.022em;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.origin-hero-heading em {
+    font-style: italic;
+    font-family: inherit;
+}
+
+.origin-hero-desc {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.48;
+    letter-spacing: -0.01em;
+    color: var(--theme-text-muted);
+    margin-bottom: 20px;
+    text-wrap: balance;
+    max-width: 100%;
+    z-index: 20;
+}
+
+@media (min-width: 768px) {
+    .origin-hero-desc {
+        font-size: clamp(1rem, 1.15vw, 1.15rem);
+        line-height: 1.45;
+        margin-bottom: 1.35rem;
+    }
+}
+
+.origin-hero-cta {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.48;
+    letter-spacing: -0.01em;
+    color: var(--theme-text);
+    z-index: 20;
+}
+
+@media (min-width: 768px) {
+    .origin-hero-cta {
+        font-size: clamp(1rem, 1.15vw, 1.15rem);
+        line-height: 1.45;
+    }
+}
+
+.origin-hero-link {
+    color: var(--theme-text);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.5);
+    text-underline-offset: 0.22em;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.origin-hero-link:hover {
+    text-decoration-color: #ffffff;
+}
+
+/* ==========================================================================
+   BOTTOM FOOTER LINKS (MAIL / FAB / DOCS / LANG)
+   ========================================================================== */
+.origin-bottom-right-bar {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    letter-spacing: -0.01em;
+    color: var(--theme-text-muted);
+    z-index: 30;
+    user-select: text;
+}
+
+@media (min-width: 768px) {
+    .origin-bottom-right-bar {
+        left: auto;
+        bottom: clamp(1.5rem, 3vw, 2.5rem);
+        right: clamp(1.75rem, 3.5vw, 3rem);
+        font-size: clamp(0.9rem, 1.05vw, 1rem);
+        gap: 0.85rem;
+    }
+}
+
+.origin-bottom-link {
+    color: var(--theme-text);
+    text-decoration: none;
+    transition: color 0.18s ease, opacity 0.18s ease;
+    opacity: 0.88;
+}
+
+.origin-bottom-link:hover {
+    color: #ffffff;
+    opacity: 1;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.5);
+    text-underline-offset: 0.22em;
+}
+
+.origin-bottom-sep {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.85em;
+    user-select: none;
+}

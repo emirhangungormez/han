@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Temel Blueprint Node'u (Unreal Engine 5) — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine 5 için 100 temel Blueprint node'u kapsamlı rehberi. İnteraktif görsel node grafikleri, kopyalanabilir UE kodları ve YouTube video serisi.">
+    <meta name="author" content="HAN">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://han.emirhangungormez.com.tr/docs/tr/blueprint/">
+    <link rel="alternate" hreflang="tr" href="https://han.emirhangungormez.com.tr/docs/tr/blueprint/">
+    <link rel="alternate" hreflang="en" href="https://han.emirhangungormez.com.tr/docs/blueprint/">
+    <link rel="alternate" hreflang="x-default" href="https://han.emirhangungormez.com.tr/docs/blueprint/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="HAN">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:url" content="https://han.emirhangungormez.com.tr/docs/tr/blueprint/">
+    <meta property="og:title" content="100 Temel Blueprint Node'u (Unreal Engine 5) — HAN Dokümantasyon">
+    <meta property="og:description" content="Unreal Engine 5 için 100 temel Blueprint node'u kapsamlı rehberi. İnteraktif görsel node grafikleri, kopyalanabilir UE kodları ve YouTube video serisi.">
+    <meta property="og:image" content="https://han.emirhangungormez.com.tr/img/background.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@emirhangngrmz">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+    <style>
+        .bp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0 35px;
+        }
+        .bp-card {
+            display: flex;
+            flex-direction: column;
+            padding: 16px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s ease;
+        }
+        .bp-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+        }
+        .bp-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .bp-tag {
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--bg-muted);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        .bp-card-title {
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        .bp-card-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex: 1;
+        }
+        .bp-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.74rem;
+            color: var(--text-muted);
+        }
+        .bp-search-box {
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+        .bp-search-box:focus {
+            border-color: var(--border-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Shell -->
+    <div class="docs-shell">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <!-- Section 1: Dokümantasyon -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Dokümantasyon</div>
+                    <a href="/docs/tr/" class="docs-sidebar-link">Giriş</a>
+                    <a href="/docs/tr/intro/" class="docs-sidebar-link">Stüdyo &amp; Vizyon</a>
+                    <a href="/docs/tr/support/" class="docs-sidebar-link">Destek &amp; İletişim</a>
+                </div>
+
+                <!-- Section 2: YouTube Serileri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">YouTube Serileri</div>
+                    <div class="docs-sidebar-folder">
+                        <div class="docs-sidebar-folder-title">
+                            <span>100 Temel Blueprint Node</span>
+                        </div>
+                        <div class="docs-sidebar-nested">
+                            <a href="/docs/tr/blueprint/" class="docs-sidebar-link active">Genel Bakış (İndeks)</a>
+                            <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch</a>
+                            <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence</a>
+                            <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">Blueprint Kodlayıcı</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Fab Ürünleri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Fab Ürünleri</div>
+                    <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Fab Mağazası</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-muted); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Yakında</span>
+                    </a>
+                </div>
+            </div>
+
+                                    <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <span>100 Temel Blueprint Node</span>
+                </div>
+
+                <h1 id="blueprint-hub" class="docs-title">100 Temel Blueprint Node</h1>
+                <p class="docs-lead">
+                    YouTube video serimizde ele aldığımız 100 temel Blueprint düğümünün pratik oyun geliştirme örnekleri, pin analizleri ve video anlatımları indeksi.
+                </p>
+
+                <div style="margin: 25px 0 25px;">
+                    <input type="text" id="bp-filter" class="bp-search-box" placeholder="Dersler ve node'lar arasında filtreleyin (Branch, Sequence, Timer)...">
+                </div>
+
+                <!-- Lessons & Node Cards Grid -->
+                <h2 id="cat-flow">Ders Listesi</h2>
+                <div class="bp-grid">
+                    <a href="/docs/tr/blueprint/flow-control/branch/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Flow Control</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">#01</span>
+                        </div>
+                        <div class="bp-card-title">01. Branch (Koşul Dalı)</div>
+                        <div class="bp-card-desc">Gelen Boolean mantıksal değerine göre yürütme akışını True veya False kollarına ayırır.</div>
+                    </a>
+
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Flow Control</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">#02</span>
+                        </div>
+                        <div class="bp-card-title">02. Sequence (Sıralı Yürütme)</div>
+                        <div class="bp-card-desc">Tek bir yürütme tetiklemesinde birden fazla işlemi aynı karede sırayla çalıştırır.</div>
+                    </a>
+
+                    <a href="/docs/tr/blueprint/sandbox/" class="bp-card">
+                        <div class="bp-card-top">
+                            <span class="bp-tag">Araç</span>
+                            <span style="font-size: 0.74rem; color: var(--text-muted);">Playground</span>
+                        </div>
+                        <div class="bp-card-title">Blueprint Kodlayıcı</div>
+                        <div class="bp-card-desc">Unreal Engine editöründen kopyalanan düğümleri tarayıcıda canlı olarak test edin ve görselleştirin.</div>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <!-- Table of Contents (Right) -->
+        <aside class="docs-toc">
+            <div class="docs-toc-title">Bu Sayfada</div>
+            <ul class="docs-toc-list">
+                <li><a href="#blueprint-hub" class="docs-toc-link active">100 Temel Blueprint Node</a></li>
+                <li><a href="#cat-flow" class="docs-toc-link">Ders Listesi</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Bu Sayfayı Kopyala">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Bu Sayfayı Kopyala</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+    <script>
+        // Live client-side filtering of node cards
+        const filterInput = document.getElementById('bp-filter');
+        if (filterInput) {
+            filterInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                document.querySelectorAll('.bp-card').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = (!term || text.includes(term)) ? 'flex' : 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html>

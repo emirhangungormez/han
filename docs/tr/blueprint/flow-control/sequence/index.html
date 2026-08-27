@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence (Sıralı Yürütme) Node Rehberi — 100 Blueprint Node #02 — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine 5 Sequence node'u detaylı anlatımı. Çoklu akış yönetimi, interaktif blueprint grafiği, kopyalanabilir UE kodu ve YouTube ders videosu.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <!-- Section 1: Dokümantasyon -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Dokümantasyon</div>
+                    <a href="/docs/tr/" class="docs-sidebar-link">Giriş</a>
+                    <a href="/docs/tr/intro/" class="docs-sidebar-link">Stüdyo &amp; Vizyon</a>
+                    <a href="/docs/tr/support/" class="docs-sidebar-link">Destek &amp; İletişim</a>
+                </div>
+
+                <!-- Section 2: YouTube Serileri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">YouTube Serileri</div>
+                    <div class="docs-sidebar-folder">
+                        <div class="docs-sidebar-folder-title">
+                            <span>100 Temel Blueprint Node</span>
+                        </div>
+                        <div class="docs-sidebar-nested">
+                            <a href="/docs/tr/blueprint/" class="docs-sidebar-link">Genel Bakış (İndeks)</a>
+                            <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch</a>
+                            <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link active">02. Sequence</a>
+                            <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">Blueprint Kodlayıcı</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Fab Ürünleri -->
+                <div class="docs-sidebar-section">
+                    <div class="docs-sidebar-section-title">Fab Ürünleri</div>
+                    <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Fab Mağazası</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-muted); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Yakında</span>
+                    </a>
+                </div>
+            </div>
+                                <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/">100 Temel Blueprint Node</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/#cat-flow">Akış Kontrolü</a>
+                    <span>/</span>
+                    <span>Sequence</span>
+                </div>
+
+                <h1 id="sequence" class="docs-title">Sequence (Sıralı Yürütme)</h1>
+                <p class="docs-lead">
+                    Tek bir yürütme (exec) sinyalini alıp bağlı olan çıkış pinlerini (Then 0, Then 1, Then 2...) yukarıdan aşağıya doğru aynı kare içerisinde ardışık ve senkron olarak çalıştırır. Blueprint grafiklerinin temiz ve modüler tutulması için en hayati node'lardan biridir.
+                </p>
+
+                <!-- Metadata badges -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
+                    <span style="background: var(--bg-muted); color: var(--text-primary); font-size: 0.75rem; font-weight: 450; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Kategori: Flow Control</span>
+                    <span style="background: var(--bg-muted); color: var(--text-primary); font-size: 0.75rem; font-weight: 450; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Zorluk: Başlangıç</span>
+                    <span style="background: var(--bg-muted); color: var(--text-secondary); font-size: 0.75rem; font-family: var(--font-mono); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">K2Node_ExecutionSequence</span>
+                </div>
+
+                <!-- Video Showcase -->
+                <h2 id="video-lesson">YouTube Video Dersi (#02)</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube-nocookie.com/embed/69vnDbbrs2g" title="100 Temel Blueprint Node'u — #02 Sequence (Sıralı Yürütme)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <!-- Interactive Blueprint Visualizer -->
+                <h2 id="interactive-graph">İnteraktif Blueprint Grafiği &amp; Kopyalanabilir Kod</h2>
+                <p>
+                    Aşağıdaki grafiği panoya kopyalamak için "Copy Nodes" butonuna basın:
+                </p>
+
+                <div data-ue-blueprint data-title="Sequence: Sıralı Skor Matematik Zinciri (Score Artırma, Çıkarma &amp; Yazdırma)">
+                    <script type="text/plain">
+Begin Object Class=/Script/BlueprintGraph.K2Node_ExecutionSequence Name="K2Node_ExecutionSequence_3" ExportPath="/Script/BlueprintGraph.K2Node_ExecutionSequence'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_ExecutionSequence_3'"
+   NodePosX=1328
+   NodePosY=-96
+   NodeGuid=F882B5314FC26A1C6C7ACD8DEC1898BF
+   CustomProperties Pin (PinId=88EB29E4420DB6A987DAF895F1EF8E30,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_7 AB41C59B42946C54FFF78B8AF2BC8837,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=6950402D419BDF3D960CF2B2E9F82394,PinName="then_0",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_MacroInstance_6 259C973D4B0C0BC7F6A457A415A21DD6,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=4D95AC834351FEBAF7D4C2AC94F90E20,PinName="then_1",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_8 4BFF9C0D451A56D7C7DF5BBA81D8CD47,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=7D01933E4E2B96C8EBD81E8463EAD0D3,PinName="then_2",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_Knot_1 AEE96D134FF7FC97AB370AAAA37B1B80,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=7CB4E8DF4F525E1C9E8B41B64F9B1CBE,PinName="then_3",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_0 842357734C1D8E516D469EB5F90A0863,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableSet Name="K2Node_VariableSet_7" ExportPath="/Script/BlueprintGraph.K2Node_VariableSet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableSet_7'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1088
+   NodePosY=-80
+   NodeGuid=B7C0999A434B37B64F80159C8F361339
+   CustomProperties Pin (PinId=C33485544E8411CC161BE8A3423D4A91,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=AB41C59B42946C54FFF78B8AF2BC8837,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_ExecutionSequence_3 88EB29E4420DB6A987DAF895F1EF8E30,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=9826A9B24CE5738C1ACE679E61ADD0C9,PinName="Score",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="5",AutogeneratedDefaultValue="0",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=F56F7D9146AECD95A05169B3F8A562DF,PinName="Output_Get",PinToolTip="Retrieves the value of the variable, can use instead of a separate Get node",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_MacroInstance_6 7948DCDF471A63B7D6733CA7FCC15BEE,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=E3EAAD094E2329D8C0F49EB77308F17A,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_MacroInstance Name="K2Node_MacroInstance_6" ExportPath="/Script/BlueprintGraph.K2Node_MacroInstance'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_MacroInstance_6'"
+   MacroGraphReference=(MacroGraph="/Script/Engine.EdGraph'/Engine/EditorBlueprintResources/StandardMacros.StandardMacros:IncrementInt'",GraphBlueprint="/Script/Engine.Blueprint'/Engine/EditorBlueprintResources/StandardMacros.StandardMacros'",GraphGuid=ABF609A74436C3ED7357E59E21A41B9A)
+   NodePosX=1616
+   NodePosY=-80
+   NodeGuid=AAB5E439400F39884B7F56A122FAC5CB
+   CustomProperties Pin (PinId=259C973D4B0C0BC7F6A457A415A21DD6,PinName=" ",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_ExecutionSequence_3 6950402D419BDF3D960CF2B2E9F82394,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=7948DCDF471A63B7D6733CA7FCC15BEE,PinName="Value",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=True,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_7 F56F7D9146AECD95A05169B3F8A562DF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=7D2900244FB86CF65C1BEBA86583A5BF,PinName="  ",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_9 4BFF9C0D451A56D7C7DF5BBA81D8CD47,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=F1D073A34820F1DA8E18679BB11A5B1C,PinName="Result",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_9 547F069D4A30E286FBE9A0BB2D83857C,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableSet Name="K2Node_VariableSet_9" ExportPath="/Script/BlueprintGraph.K2Node_VariableSet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableSet_9'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1776
+   NodePosY=-80
+   NodeGuid=7727F33948A3DED31F71658E8FE8A5DC
+   CustomProperties Pin (PinId=4BFF9C0D451A56D7C7DF5BBA81D8CD47,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_MacroInstance_6 7D2900244FB86CF65C1BEBA86583A5BF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=8A8542434760D6A73569FCBA9974CEFA,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=547F069D4A30E286FBE9A0BB2D83857C,PinName="Score",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_MacroInstance_6 F1D073A34820F1DA8E18679BB11A5B1C,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=6A9C64C14B3945C45FAB20A5C2DF99E1,PinName="Output_Get",PinToolTip="Retrieves the value of the variable, can use instead of a separate Get node",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=93C71DA64205D71E9A552DA603F94863,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableGet Name="K2Node_VariableGet_5" ExportPath="/Script/BlueprintGraph.K2Node_VariableGet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableGet_5'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1600
+   NodePosY=160
+   NodeGuid=6D463F394B3F62760EA4BF9B9F4CDDB2
+   CustomProperties Pin (PinId=0C04FA9C45BA06093C15E084E50631CB,PinName="Score",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_PromotableOperator_2 32208A434572AF8FFD298F86385CAFEB,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=8A0E5DCA40A2779CB1C458B767511DEA,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_PromotableOperator Name="K2Node_PromotableOperator_2" ExportPath="/Script/BlueprintGraph.K2Node_PromotableOperator'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_PromotableOperator_2'"
+   OperationName="Add"
+   bDefaultsToPureFunc=True
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetMathLibrary'",MemberName="Add_IntInt")
+   NodePosX=1600
+   NodePosY=80
+   NodeGuid=9107A37547F264E16BE585A8237E2431
+   CustomProperties Pin (PinId=32208A434572AF8FFD298F86385CAFEB,PinName="A",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableGet_5 0C04FA9C45BA06093C15E084E50631CB,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=445EFB1B45F0133ACDFF69B8692E7AD6,PinName="B",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="10",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=EC7FE5F242122C3026CB3B8DC8002918,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_8 547F069D4A30E286FBE9A0BB2D83857C,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableSet Name="K2Node_VariableSet_8" ExportPath="/Script/BlueprintGraph.K2Node_VariableSet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableSet_8'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1776
+   NodePosY=42
+   NodeGuid=563BD02A4F09FA33623706AE1C8E1D9F
+   CustomProperties Pin (PinId=4BFF9C0D451A56D7C7DF5BBA81D8CD47,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_ExecutionSequence_3 4D95AC834351FEBAF7D4C2AC94F90E20,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=8A8542434760D6A73569FCBA9974CEFA,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=547F069D4A30E286FBE9A0BB2D83857C,PinName="Score",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_PromotableOperator_2 EC7FE5F242122C3026CB3B8DC8002918,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=6A9C64C14B3945C45FAB20A5C2DF99E1,PinName="Output_Get",PinToolTip="Retrieves the value of the variable, can use instead of a separate Get node",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=93C71DA64205D71E9A552DA603F94863,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableGet Name="K2Node_VariableGet_6" ExportPath="/Script/BlueprintGraph.K2Node_VariableGet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableGet_6'"
+   VariableReference=(MemberName="TargetScore",MemberGuid=5F677061483D17EF77D82790B257BA16,bSelfContext=True)
+   NodePosX=1600
+   NodePosY=288
+   NodeGuid=061C948A464C4046DB47EF9A12423059
+   CustomProperties Pin (PinId=8D43AEA143B25B9F4965ED9C02513756,PinName="TargetScore",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_PromotableOperator_4 203B736346A02A7D18A201A95EB4BF18,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=FB47A9354B4DC54B33AF4B9297F06983,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableGet Name="K2Node_VariableGet_7" ExportPath="/Script/BlueprintGraph.K2Node_VariableGet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableGet_7'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1600
+   NodePosY=336
+   NodeGuid=C7B57C844F2D8BD1877EE19276967A37
+   CustomProperties Pin (PinId=67A2108D49822AEE233C9ABB25729E5E,PinName="Score",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_PromotableOperator_4 1043A1CA4278B2BDBF4F248FD3A854DB,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=4577A8F64284B908E593C8822F352DD1,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_PromotableOperator Name="K2Node_PromotableOperator_4" ExportPath="/Script/BlueprintGraph.K2Node_PromotableOperator'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_PromotableOperator_4'"
+   OperationName="Subtract"
+   bDefaultsToPureFunc=True
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetMathLibrary'",MemberName="Subtract_IntInt")
+   NodePosX=1776
+   NodePosY=288
+   NodeGuid=A859B9BB42700969D5FB85B265E37866
+   CustomProperties Pin (PinId=203B736346A02A7D18A201A95EB4BF18,PinName="A",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableGet_6 8D43AEA143B25B9F4965ED9C02513756,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=1043A1CA4278B2BDBF4F248FD3A854DB,PinName="B",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableGet_7 67A2108D49822AEE233C9ABB25729E5E,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=6833DE7A44CC2E7A6F13F282BDF0202A,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_10 D4F6181E433D08DF35AC8AAFE4AC177C,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableSet Name="K2Node_VariableSet_10" ExportPath="/Script/BlueprintGraph.K2Node_VariableSet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableSet_10'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1952
+   NodePosY=240
+   NodeGuid=D0DAD9B84AF7B8109769109C6D2E75A5
+   CustomProperties Pin (PinId=F4900E5C4C68FFD050E356ABC60C4C4D,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_Knot_1 F7E150484028667ED61BBD90A35BDD74,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=1BD64C7A477D1BBB5309DC8BEA20C953,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=D4F6181E433D08DF35AC8AAFE4AC177C,PinName="Score",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_PromotableOperator_4 6833DE7A44CC2E7A6F13F282BDF0202A,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=41A0D6064BEA98802EE132BEF4C72FF8,PinName="Output_Get",PinToolTip="Retrieves the value of the variable, can use instead of a separate Get node",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=A43314E247BBB8467AC1F4AF8767B278,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_Knot Name="K2Node_Knot_1" ExportPath="/Script/BlueprintGraph.K2Node_Knot'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_Knot_1'"
+   NodePosX=1600
+   NodePosY=256
+   NodeGuid=981B4C69467A9D8DB9AAB3A38FC0BE20
+   CustomProperties Pin (PinId=AEE96D134FF7FC97AB370AAAA37B1B80,PinName="InputPin",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_ExecutionSequence_3 7D01933E4E2B96C8EBD81E8463EAD0D3,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=True,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=F7E150484028667ED61BBD90A35BDD74,PinName="OutputPin",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_VariableSet_10 F4900E5C4C68FFD050E356ABC60C4C4D,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_0" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_CallFunction_0'"
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",MemberName="PrintString")
+   NodePosX=1600
+   NodePosY=432
+   AdvancedPinDisplay=Hidden
+   EnabledState=DevelopmentOnly
+   NodeGuid=8F48A8EE42307C50E1C7188A6F7DB465
+   CustomProperties Pin (PinId=842357734C1D8E516D469EB5F90A0863,PinName="execute",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_ExecutionSequence_3 7CB4E8DF4F525E1C9E8B41B64F9B1CBE,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=33191F0942E42F1E76100690B5DBA5C3,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=FA5D265D40FD019AB36C72BA0DF590A0,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.KismetSystemLibrary'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultObject="/Script/Engine.Default__KismetSystemLibrary",PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=38B8327943BFB73054C021A1690DC141,PinName="WorldContextObject",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/CoreUObject.Object'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=00AC665545DC96720854B7BBC0992AEB,PinName="InString",PinType.PinCategory="string",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="Hello",AutogeneratedDefaultValue="Hello",LinkedTo=(K2Node_CallFunction_5 7560BA4E4B11A759AF5915813C3E6330,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=9EE6A63E448CB8AD0CB639AA45740B2A,PinName="bPrintToScreen",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=71398A304E80B4E43CAF18B26911189E,PinName="bPrintToLog",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=FAC809A84C4C4597A0FA43AFE967908B,PinName="TextColor",PinType.PinCategory="struct",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.ScriptStruct'/Script/CoreUObject.LinearColor'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",AutogeneratedDefaultValue="(R=0.000000,G=0.660000,B=1.000000,A=1.000000)",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=9744C43F4790E9CB0356F4B2E3D243CF,PinName="Duration",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="2.000000",AutogeneratedDefaultValue="2.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=3465F3A1441CF94534D6279F5D4D599B,PinName="Key",PinType.PinCategory="name",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="None",AutogeneratedDefaultValue="None",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_VariableGet Name="K2Node_VariableGet_8" ExportPath="/Script/BlueprintGraph.K2Node_VariableGet'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_VariableGet_8'"
+   VariableReference=(MemberName="Score",MemberGuid=704AFA8E4286E4246E2975B9049503CA,bSelfContext=True)
+   NodePosX=1600
+   NodePosY=624
+   NodeGuid=7EB6DE7E48BF721EC2E9BCBE455DFDF9
+   CustomProperties Pin (PinId=69F3C8B143F59C2245898A9F41622E39,PinName="Score",Direction="EGPD_Output",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_CallFunction_5 32366FB9422171583EE5E59D7C935A4B,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=0747880145CD962A1275BC896B05823E,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/Engine.BlueprintGeneratedClass'/Game/Edu/BP_Nodes.BP_Nodes_C'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_5" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/Edu/BP_Nodes.BP_Nodes:EventGraph.K2Node_CallFunction_5'"
+   bDefaultsToPureFunc=True
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.KismetStringLibrary'",MemberName="Conv_IntToString")
+   NodePosX=1600
+   NodePosY=576
+   NodeGuid=92A2A771420FA7F73748A19BC58A6B4C
+   CustomProperties Pin (PinId=7A98D3944ED331EAADD436BE1183DC74,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.KismetStringLibrary'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultObject="/Script/Engine.Default__KismetStringLibrary",PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=32366FB9422171583EE5E59D7C935A4B,PinName="InInt",PinType.PinCategory="int",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0",AutogeneratedDefaultValue="0",LinkedTo=(K2Node_VariableGet_8 69F3C8B143F59C2245898A9F41622E39,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=7560BA4E4B11A759AF5915813C3E6330,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="string",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_0 00AC665545DC96720854B7BBC0992AEB,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+                    </script>
+                </div>
+
+                <h2 id="pin-breakdown">Pin Tanımları</h2>
+                <p>
+                    Videodaki sıralı yürütme mantığı:
+                </p>
+                <ol>
+                    <li>Başlangıç: <code>Score = 5</code> olarak atanır ve <code>Sequence</code> node'u tetiklenir.</li>
+                    <li>Then 0 (IncrementInt): Score 1 artırılır (Score = 6).</li>
+                    <li>Then 1 (Add): Score değerine +10 eklenir ve atanır (Score = 16).</li>
+                    <li>Then 2 (Subtract): <code>TargetScore - Score</code> işlemi yapılıp Score'a yeni değer olarak atanır.</li>
+                    <li>Then 3 (PrintString): En son elde edilen Score değeri <code>Conv_IntToString</code> ile ekrana yazdırılır.</li>
+                </ol>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="background: var(--bg-hover); text-align: left;">
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Pin Adı</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Yön</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Veri Tipi</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color);">Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>(Exec In)</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #38bdf8;">Giriş</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Tüm zinciri başlatan tetikleyici sinyal.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>Then 0</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #10b981;">Çıkış</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">İlk olarak çalışan ve tamamlanması beklenen yürütme kolu.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);"><strong>Then 1...N</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color); color: #10b981;">Çıkış</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Exec (Beyaz)</td>
+                                <td style="padding: 8px 12px; border: 1px solid var(--border-color);">Önceki çıkışın tüm senkron alt kolları bittikten sonra sırayla tetiklenen çıkışlar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Practical Game Examples -->
+                <h2 id="use-cases">Kullanım Senaryoları</h2>
+                <p>
+                    Blueprint grafiklerini temiz ve modüler tutmak için Sequence kullanım alanları:
+                </p>
+                <ul>
+                    <li>Çoklu Veri Başlatma: Oyun açılışında birden fazla veriyi (can, skor, envanter) tek akışta senkron atamak.</li>
+                    <li>Aktör Kurulumu: Spawn edilen aktörün bileşenlerini, referanslarını ve fizik ayarlarını sırayla yapılandırmak.</li>
+                    <li>Görsel Düzen: Uzun ve karmaşık düğüm zincirlerini temiz, yukarıdan aşağıya okunur sıralı bloklara bölmek.</li>
+                    <li>Kullanıcı Arayüzü (UI): Arayüzü oluşturduktan hemen sonra verileri bağlamak ve animasyonları tetiklemek.</li>
+                </ul>
+
+                <!-- Common Mistakes -->
+                <h2 id="common-mistakes">Sık Yapılan Hatalar</h2>
+                <ul>
+                    <li>Asenkron (Delay) İşlemler: Sequence node'u gecikmeli işlemleri beklemez; Then 0 tetiklendiği anda aynı mikrosaniyede Then 1 çalıştırılır. Beklemeli işlemler için Timer veya Timeline kullanılmalıdır.</li>
+                    <li>Veri Yarışı (Race Condition): Bir yürütme kolu değişkene yazarken, sonraki kolun aynı kare içinde eski değeri okuması riskine dikkat edilmelidir.</li>
+                    <li>Gereksiz Çoklu Çıkış: Sıralı mantık gerektirmeyen tekil işlemlerde aşırı Sequence kullanarak grafiği karmaşıklaştırmak.</li>
+                </ul>
+
+                <!-- Official Documentation -->
+                <h2 id="references">Resmi Kaynaklar</h2>
+                <ul>
+                    <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/flow-control-in-unreal-engine-blueprints" target="_blank" rel="noopener noreferrer">Unreal Engine 5 Flow Control Dokümantasyonu</a></li>
+                    <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/blueprints-visual-scripting-in-unreal-engine" target="_blank" rel="noopener noreferrer">Epic Games Blueprint Görsel Programlama Kılavuzu</a></li>
+                </ul>
+
+                <div class="docs-pagination">
+                    <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-page-nav-card">
+                        <span class="docs-page-nav-sub">Önceki Node</span>
+                        <span class="docs-page-nav-title">← 01. Branch (Koşul Dalı)</span>
+                    </a>
+                    <a href="/docs/tr/blueprint/timers/set-timer-by-event/" class="docs-page-nav-card" style="text-align: right;">
+                        <span class="docs-page-nav-sub">Sonraki Node</span>
+                        <span class="docs-page-nav-title">15. Set Timer by Event →</span>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <!-- Table of Contents (Right) -->
+        <aside class="docs-toc">
+            <div class="docs-toc-title">Bu Sayfada</div>
+            <ul class="docs-toc-list">
+                <li><a href="#sequence" class="docs-toc-link active">Sequence (Sıralı Yürütme)</a></li>
+                <li><a href="#video-lesson" class="docs-toc-link">YouTube Video Dersi (02)</a></li>
+                <li><a href="#interactive-graph" class="docs-toc-link">İnteraktif Blueprint Grafiği & Kopyalanabilir Kod</a></li>
+                <li><a href="#pin-breakdown" class="docs-toc-link">Pin Tanımları</a></li>
+                <li><a href="#use-cases" class="docs-toc-link">Kullanım Senaryoları</a></li>
+                <li><a href="#common-mistakes" class="docs-toc-link">Sık Yapılan Hatalar</a></li>
+                <li><a href="#references" class="docs-toc-link">Resmi Kaynaklar</a></li>
+            </ul>
+            <div class="docs-toc-actions">
+                <button type="button" class="docs-copy-page-btn" aria-label="Bu Sayfayı Kopyala">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Bu Sayfayı Kopyala</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+</body>
+</html>

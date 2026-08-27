@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Timer by Event Node Rehberi — 100 Blueprint Node #15 — HAN Dokümantasyon</title>
+    <meta name="description" content="Unreal Engine 5 Set Timer by Event node'u detaylı anlatımı. Event Tick optimizasyonu, interaktif blueprint grafiği ve kopyalanabilir UE kodu.">
+    <link rel="stylesheet" href="/docs/style.css?v=10.0">
+    <link rel="stylesheet" href="/docs/blueprint/render.css?v=1.0">
+    <link rel="stylesheet" href="/docs/blueprint/blueprint-wrapper.css?v=1.0">
+</head>
+<body>
+        <!-- Top Header -->
+    <header class="docs-header">
+        <div class="docs-header-left">
+            <a href="/" class="docs-brand" aria-label="HAN Interactive Entertainment">
+                <img src="/img/logo.svg" alt="HAN" class="docs-brand-logo">
+            </a>
+
+            <nav class="docs-nav-links">
+                <a href="/docs/tr/" class="docs-nav-link active">Dokümantasyon</a>
+                <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-nav-link">Fab Mağazası</a>
+                <a href="/docs/tr/support/" class="docs-nav-link">Destek</a>
+            </nav>
+        </div>
+
+        <div class="docs-header-center">
+            <button type="button" class="docs-search-btn" aria-label="Dokümanlarda ara">
+                <div class="docs-search-btn-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Dokümanlarda ara...</span>
+                </div>
+                <span class="docs-kbd">⌘K</span>
+            </button>
+        </div>
+
+        <div class="docs-header-right">
+            <a href="https://www.fab.com/sellers/Han%20Interactive%20Entertaiment" target="_blank" rel="noopener noreferrer" class="docs-btn-fab">
+                <span>Fab Mağazası</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+            <button type="button" class="docs-menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="docs-shell">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-top">
+                <div class="docs-sidebar-group">
+                    <h3 class="docs-sidebar-title">100 Blueprint Node'u (UE5)</h3>
+                    <a href="/docs/tr/blueprint/" class="docs-sidebar-link">← Tüm Node'lar (Index)</a>
+                    <a href="/docs/tr/blueprint/flow-control/branch/" class="docs-sidebar-link">01. Branch (Koşul Dalı)</a>
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-sidebar-link">02. Sequence (Sıralı Akış)</a>
+                    <a href="/docs/tr/blueprint/timers/set-timer-by-event/" class="docs-sidebar-link active">15. Set Timer by Event</a>
+                    <a href="/docs/tr/blueprint/collision/line-trace-by-channel/" class="docs-sidebar-link">25. Line Trace By Channel</a>
+                    <a href="/docs/tr/blueprint/actor/spawn-actor-from-class/" class="docs-sidebar-link">35. SpawnActorFromClass</a>
+                    <a href="/docs/tr/blueprint/sandbox/" class="docs-sidebar-link">⚡ Canlı Node Görselleştirici</a>
+                </div>
+            </div>
+                                <!-- Sidebar Footer -->
+                        <!-- Sidebar Footer -->
+            <div class="docs-sidebar-footer">
+                <div class="docs-theme-toggle-pill" role="radiogroup" aria-label="Tema seçici">
+                    <button type="button" class="docs-theme-btn" data-theme="system" title="Sistem">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn active" data-theme="light" title="Açık">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </button>
+                    <button type="button" class="docs-theme-btn" data-theme="dark" title="Koyu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+
+                <div class="docs-lang-wrap">
+                    <div class="docs-lang-pill" role="button" aria-haspopup="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="docs-lang-dropdown">
+                        <a href="/docs/blueprint/" class="docs-lang-option"><span>English</span></a>
+                        <a href="/docs/tr/blueprint/" class="docs-lang-option active"><span>Türkçe</span></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="docs-main">
+            <article class="docs-article">
+                <div class="docs-breadcrumb">
+                    <a href="/docs/tr/">Dokümanlar</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/">100 Temel Blueprint Node</a>
+                    <span>/</span>
+                    <a href="/docs/tr/blueprint/#cat-timers">Zamanlayıcılar</a>
+                    <span>/</span>
+                    <span>Set Timer by Event</span>
+                </div>
+
+                <h1 class="docs-title">Set Timer by Event (Olay Zamanlayıcısı)</h1>
+                <p class="docs-lead">
+                    Unreal Engine oyunlarında <strong>Event Tick maliyetini düşürmek</strong> ve belirli zaman aralıklarında (örneğin 0.5 saniyede bir can yenileme, 1.0 saniyede bir yapay zeka alan taraması) fonksiyon çalıştırmak için en çok tercih edilen optimizasyon node'udur.
+                </p>
+
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <span style="background: #0f766e; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px;">Kategori: Timers &amp; Async</span>
+                    <span style="background: #0284c7; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px;">Zorluk: Orta</span>
+                    <span style="background: #1e293b; color: #94a3b8; font-size: 0.75rem; font-family: monospace; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color);">FTimerManager::SetTimer</span>
+                </div>
+
+                <h2 id="interactive-graph">İnteraktif Blueprint Grafiği</h2>
+                <div data-ue-blueprint data-title="Set Timer by Event: Periyodik Can Yenileme Mekaniği">
+                    <script type="text/plain">
+Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_Start"
+   EventReference=(MemberParent=Class'"/Script/Engine.Actor"',MemberName="ReceiveBeginPlay")
+   bOverrideFunction=true
+   NodePosX=60
+   NodePosY=100
+   CustomProperties Pin (PinId=P1,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_SetTimer T1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_SetTimer"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="K2_SetTimerDelegate")
+   NodePosX=320
+   NodePosY=100
+   CustomProperties Pin (PinId=T1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_Event_Start P1))
+   CustomProperties Pin (PinId=T2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=T3,PinName="Delegate",PinType.PinCategory="delegate",LinkedTo=(K2Node_CustomEvent_Regen D1))
+   CustomProperties Pin (PinId=T4,PinName="Time",PinType.PinCategory="real",DefaultValue="1.000000")
+   CustomProperties Pin (PinId=T5,PinName="bLooping",PinType.PinCategory="bool",DefaultValue="true")
+   CustomProperties Pin (PinId=T6,PinName="ReturnValue",Direction="EGPD_Output",PinType.PinCategory="struct",PinSubCategoryObject=ScriptStruct'"/Script/Engine.TimerHandle"')
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CustomEvent Name="K2Node_CustomEvent_Regen"
+   CustomFunctionName="RegenerateHealthTick"
+   NodePosX=60
+   NodePosY=280
+   CustomProperties Pin (PinId=D1,PinName="OutputDelegate",PinType.PinCategory="delegate",Direction="EGPD_Output",LinkedTo=(K2Node_CallFunction_SetTimer T3))
+   CustomProperties Pin (PinId=D2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec",LinkedTo=(K2Node_CallFunction_Print PR1))
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_Print"
+   FunctionReference=(MemberParent=Class'"/Script/Engine.KismetSystemLibrary"',MemberName="PrintString")
+   NodePosX=360
+   NodePosY=280
+   CustomProperties Pin (PinId=PR1,PinName="execute",PinType.PinCategory="exec",LinkedTo=(K2Node_CustomEvent_Regen D2))
+   CustomProperties Pin (PinId=PR2,PinName="then",Direction="EGPD_Output",PinType.PinCategory="exec")
+   CustomProperties Pin (PinId=PR3,PinName="inString",PinType.PinCategory="string",DefaultValue="+5 Can Yenilendi (Timer Tick)")
+End Object
+                    </script>
+                </div>
+
+                <h2>Pin Parametreleri</h2>
+                <ul>
+                    <li><strong>Delegate (Kırmızı Halka):</strong> Tetiklenecek <code>Custom Event</code>'in solundaki kırmızı delegate pinine bağlanır.</li>
+                    <li><strong>Time (Float):</strong> Timer'ın kaç saniye sonra çalışacağını belirler (Örn: <code>1.0</code>).</li>
+                    <li><strong>Looping (Bool):</strong> Eğer <code>True</code> ise işlem her belirtilen sürede tekrarlanır. <code>False</code> ise sadece bir defa çalışır ve durur.</li>
+                    <li><strong>Return Value (Timer Handle):</strong> İleride zamanlayıcıyı durdurmak veya sıfırlamak (<code>Clear and Invalidate Timer by Handle</code>) için saklanması gereken referanstır.</li>
+                </ul>
+
+                <div class="docs-callout">
+                    <strong>Neden Event Tick Yerine Timer Kullanmalısınız?</strong>
+                    <p style="margin-top: 4px; font-size: 0.85rem;">
+                        Event Tick saniyede 60-144 kez çalışır ve oyunun CPU çerçeve süresini (frame-time) tüketir. Bir can yenileme veya harita tarama işlemi saniyede 1 kez çalıştığında oyuncu aynı deneyimi yaşar ancak işlemci yükü %98 oranında azalır.
+                    </p>
+                </div>
+
+                <div class="docs-pagination">
+                    <a href="/docs/tr/blueprint/flow-control/sequence/" class="docs-page-nav-card">
+                        <span class="docs-page-nav-sub">Önceki Node</span>
+                        <span class="docs-page-nav-title">← 02. Sequence</span>
+                    </a>
+                    <a href="/docs/tr/blueprint/collision/line-trace-by-channel/" class="docs-page-nav-card" style="text-align: right;">
+                        <span class="docs-page-nav-sub">Sonraki Node</span>
+                        <span class="docs-page-nav-title">25. Line Trace By Channel →</span>
+                    </a>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="/docs/docs.js?v=10.0"></script>
+    <script src="/docs/blueprint/render.js?v=1.0"></script>
+    <script src="/docs/blueprint/blueprint-init.js?v=1.0"></script>
+    <!-- Search Modal -->
+    <div class="docs-modal-backdrop" id="docs-search-modal">
+        <div class="docs-search-modal">
+            <div class="docs-modal-input-wrap">
+                <svg class="docs-modal-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="docs-modal-input" placeholder="Dokümanlarda ara..." aria-label="Arama sorgusu">
+                <span class="docs-kbd">ESC</span>
+            </div>
+            <div class="docs-modal-results">
+                <!-- Injected by docs.js -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

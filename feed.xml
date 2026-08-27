@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HAN Interactive Entertainment Güncellemeleri</title>
+    <link>https://han.emirhangungormez.com.tr/</link>
+    <description>HAN Interactive Entertainment oyunları, pitch materyalleri, Fab eğitimleri, pluginleri ve üretim dokümantasyonu üzerine güncellemeler.</description>
+    <language>tr-TR</language>
+    <lastBuildDate>Wed, 10 Jun 2026 21:00:00 GMT</lastBuildDate>
+    <atom:link href="https://han.emirhangungormez.com.tr/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>HAN ekibi şu anda Barzakh: Star Gardener üzerinde çalışıyor</title>
+      <link>https://han.emirhangungormez.com.tr/</link>
+      <guid>https://han.emirhangungormez.com.tr/#barzakh-development</guid>
+      <pubDate>Wed, 10 Jun 2026 21:00:00 GMT</pubDate>
+      <description>HAN Interactive Entertainment, Barzakh: Star Gardener için atmosferik oyun üretimi, pitch materyalleri ve yayıncılık hazırlıkları üzerinde çalışıyor.</description>
+    </item>
+    <item>
+      <title>Pitch ve yayıncılık görüşmeleri için HAN materyalleri</title>
+      <link>https://han.emirhangungormez.com.tr/pitch.html</link>
+      <guid>https://han.emirhangungormez.com.tr/pitch.html</guid>
+      <pubDate>Wed, 10 Jun 2026 20:30:00 GMT</pubDate>
+      <description>Barzakh, Truck Up ve gelecek HAN oyunları için yatırım, yayıncılık, platform, basın ve üretim ortaklığı görüşmelerine açığız.</description>
+    </item>
+    <item>
+      <title>Fab eğitimleri, pluginler ve şablonlar hazırlanıyor</title>
+      <link>https://han.emirhangungormez.com.tr/fab.html</link>
+      <guid>https://han.emirhangungormez.com.tr/fab.html</guid>
+      <pubDate>Wed, 10 Jun 2026 20:00:00 GMT</pubDate>
+      <description>HAN, Fab için proje temelli Unreal Engine eğitimleri, pluginler ve üretim şablonları hazırlıyor. Herkese açık kitler hazır olduğunda yayınlanacak.</description>
+    </item>
+  </channel>
+</rss>

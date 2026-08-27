@@ -1,0 +1,504 @@
+/* ==========================================================================
+   HAN UNREAL ENGINE BLUEPRINT VISUALIZER & RENDERER CSS
+   Authentic Unreal Engine 5 Blueprint Graph Styling & Interactive Engine
+   ========================================================================== */
+
+/* Blueprint Container */
+.ue-blueprint-container {
+    position: relative;
+    width: 100%;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color, #27272a);
+    border-radius: 8px;
+    background-color: #121316;
+    overflow: hidden;
+    box-shadow: none;
+    font-family: var(--font-sans, "CursorGothic", -apple-system, sans-serif);
+    user-select: none;
+}
+
+/* Header Toolbar */
+.ue-bp-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: #18191e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a1a1aa;
+    font-size: 0.8rem;
+    z-index: 10;
+}
+
+.ue-bp-toolbar-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #f4f4f5;
+    letter-spacing: -0.01em;
+}
+
+.ue-bp-toolbar-badge {
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ue-bp-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ue-bp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    background: #27272a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #e4e4e7;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ue-bp-btn:hover {
+    background: #3f3f46;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ue-bp-btn-primary {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0369a1;
+}
+
+.ue-bp-btn-primary:hover {
+    background: #0369a1;
+}
+
+/* Blueprint Graph Canvas Area */
+.ue-bp-viewport {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    min-height: 380px;
+    background-color: #15161a;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 16px 16px, 128px 128px, 128px 128px;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.ue-bp-viewport:active {
+    cursor: grabbing;
+}
+
+/* Fullscreen Mode */
+.ue-blueprint-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999;
+    border-radius: 0;
+    margin: 0;
+}
+
+.ue-blueprint-container.fullscreen .ue-bp-viewport {
+    height: calc(100vh - 44px) !important;
+}
+
+/* Graph Canvas Transform Layer */
+.ue-bp-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+    pointer-events: none;
+}
+
+.ue-bp-canvas * {
+    pointer-events: auto;
+}
+
+/* SVG Spline Connection Layer */
+.ue-bp-svg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8000px;
+    height: 8000px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ue-bp-wire {
+    fill: none;
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-width 0.15s ease;
+}
+
+.ue-bp-wire.wire-exec {
+    stroke: #ffffff;
+    stroke-width: 3px;
+}
+
+.ue-bp-wire.wire-bool { stroke: #dc2626; }
+.ue-bp-wire.wire-byte, .ue-bp-wire.wire-enum { stroke: #059669; }
+.ue-bp-wire.wire-int { stroke: #06b6d4; }
+.ue-bp-wire.wire-float, .ue-bp-wire.wire-real { stroke: #34d399; }
+.ue-bp-wire.wire-string { stroke: #e11d48; }
+.ue-bp-wire.wire-text { stroke: #f43f5e; }
+.ue-bp-wire.wire-vector { stroke: #facc15; }
+.ue-bp-wire.wire-rotator { stroke: #a855f7; }
+.ue-bp-wire.wire-transform { stroke: #fb923c; }
+.ue-bp-wire.wire-object, .ue-bp-wire.wire-actor { stroke: #38bdf8; }
+.ue-bp-wire.wire-class, .ue-bp-wire.wire-interface { stroke: #818cf8; }
+.ue-bp-wire.wire-struct { stroke: #64748b; }
+.ue-bp-wire.wire-delegate { stroke: #ef4444; }
+
+/* Comment Boxes */
+.ue-bp-comment {
+    position: absolute;
+    background: rgba(30, 41, 59, 0.35);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 6px;
+    z-index: 0;
+    pointer-events: auto;
+}
+
+.ue-bp-comment-header {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    padding: 6px 10px;
+    background: rgba(15, 23, 42, 0.6);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* Unreal Nodes */
+.ue-bp-node {
+    position: absolute;
+    min-width: 170px;
+    background: #1e1f26;
+    border: 1px solid #323540;
+    border-radius: 6px;
+    box-shadow: none;
+    color: #f4f4f5;
+    z-index: 2;
+    overflow: hidden;
+    font-size: 0.75rem;
+    transition: border-color 0.15s ease;
+}
+
+.ue-bp-node:hover {
+    border-color: #60a5fa;
+    box-shadow: none;
+    z-index: 5;
+}
+
+/* Node Header */
+.ue-bp-node-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.ue-bp-node-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Header Type Variations */
+.ue-bp-node.node-event .ue-bp-node-header {
+    background: linear-gradient(180deg, #991b1b 0%, #7f1d1d 100%);
+}
+
+.ue-bp-node.node-function .ue-bp-node-header {
+    background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+}
+
+.ue-bp-node.node-pure .ue-bp-node-header {
+    background: linear-gradient(180deg, #15803d 0%, #166534 100%);
+}
+
+.ue-bp-node.node-flow .ue-bp-node-header {
+    background: linear-gradient(180deg, #475569 0%, #334155 100%);
+}
+
+.ue-bp-node.node-macro .ue-bp-node-header {
+    background: linear-gradient(180deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+.ue-bp-node.node-variable .ue-bp-node-header {
+    background: linear-gradient(180deg, #0f766e 0%, #115e59 100%);
+}
+
+.ue-bp-node-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 0.7rem;
+    opacity: 0.9;
+}
+
+.ue-bp-node-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ue-bp-node-sub {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    font-weight: normal;
+    display: block;
+}
+
+/* Node Body & Pin Rows */
+.ue-bp-node-body {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    gap: 12px;
+}
+
+.ue-bp-pins-in, .ue-bp-pins-out {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ue-bp-pins-in {
+    align-items: flex-start;
+}
+
+.ue-bp-pins-out {
+    align-items: flex-end;
+    margin-left: auto;
+}
+
+.ue-bp-pin {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 20px;
+    padding: 0 8px;
+    font-size: 0.72rem;
+    color: #e4e4e7;
+    position: relative;
+    cursor: default;
+}
+
+.ue-bp-pin.pin-out {
+    flex-direction: row-reverse;
+}
+
+/* Pin Badges & Icons */
+.ue-bp-pin-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Exec Pin (Triangle) */
+.ue-bp-pin-glyph.glyph-exec {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 8px;
+    border-color: transparent transparent transparent #ffffff;
+    border-radius: 0;
+}
+
+.ue-bp-pin-glyph.glyph-bool { background: #dc2626; }
+.ue-bp-pin-glyph.glyph-byte, .ue-bp-pin-glyph.glyph-enum { background: #059669; }
+.ue-bp-pin-glyph.glyph-int { background: #06b6d4; }
+.ue-bp-pin-glyph.glyph-float, .ue-bp-pin-glyph.glyph-real { background: #34d399; }
+.ue-bp-pin-glyph.glyph-string { background: #e11d48; }
+.ue-bp-pin-glyph.glyph-text { background: #f43f5e; }
+.ue-bp-pin-glyph.glyph-vector { background: #facc15; }
+.ue-bp-pin-glyph.glyph-rotator { background: #a855f7; }
+.ue-bp-pin-glyph.glyph-transform { background: #fb923c; }
+.ue-bp-pin-glyph.glyph-object, .ue-bp-pin-glyph.glyph-actor { background: #38bdf8; }
+.ue-bp-pin-glyph.glyph-class, .ue-bp-pin-glyph.glyph-interface { background: #818cf8; }
+.ue-bp-pin-glyph.glyph-struct { background: #64748b; }
+.ue-bp-pin-glyph.glyph-delegate {
+    background: transparent;
+    border: 2px solid #ef4444;
+    width: 8px;
+    height: 8px;
+}
+
+/* Pin Default Value Inputs */
+.ue-bp-pin-val {
+    background: #111215;
+    border: 1px solid #3b3e4a;
+    border-radius: 3px;
+    color: #94a3b8;
+    font-size: 0.65rem;
+    padding: 1px 4px;
+    font-family: var(--font-mono, monospace);
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Floating Controls (Zoom / Center) */
+.ue-bp-controls {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    background: rgba(24, 25, 30, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.ue-bp-ctrl-btn {
+    background: transparent;
+    border: none;
+    color: #d4d4d8;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ue-bp-ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.ue-bp-ctrl-btn:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Toast Notification */
+.ue-bp-toast {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: #10b981;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+}
+
+.ue-bp-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Live Sandbox / Code Inspector */
+.ue-bp-code-modal {
+    display: none;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0f1013;
+    z-index: 20;
+    padding: 12px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ue-bp-code-modal.open {
+    display: flex;
+}
+
+.ue-bp-code-textarea {
+    width: 100%;
+    flex: 1;
+    background: #18191f;
+    border: 1px solid #2e303b;
+    border-radius: 6px;
+    color: #e4e4e7;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    padding: 10px;
+    resize: none;
+    outline: none;
+}
+
+.ue-bp-code-textarea:focus {
+    border-color: #3b82f6;
+}
+
+/* BlueprintUE Iframe Container */
+.blueprintue-embed {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color, #27272a);
+    background: #121316;
+    margin: 1.5rem 0;
+}
+
+.blueprintue-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

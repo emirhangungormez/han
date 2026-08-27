@@ -1,0 +1,29 @@
+# HAN
+
+> HAN is an independent video games studio and real-time graphics technology developer. HAN develops original video game intellectual properties—including Barzakh: Star Gardener and Truck Up: Catch Me If You Can—and authors production-grade 3D environment packages and modular tools on the Epic Games Fab marketplace.
+
+## Key Projects & Products
+
+- **Barzakh: Star Gardener**: An atmospheric philosophical adventure-puzzle game exploring memory, stars, and self-discovery. (Website: https://barzakh.emirhangungormez.com.tr/ | Steam: https://store.steampowered.com/app/3849950/Barzakh_Star_Gardener/)
+- **Truck Up: Catch Me If You Can**: A vehicular survival and combat game. (Steam: https://store.steampowered.com/app/3411890/Truck_Up_Catch_Me_If_You_Can/)
+- **Fab Store**: High-fidelity modular 3D environments, Master Materials, and engine-optimized assets. (Store: https://www.fab.com/sellers/Han%20Interactive%20Entertaiment)
+
+## Documentation & Technical Knowledge Base
+
+- [Documentation Hub (EN)](https://han.emirhangungormez.com.tr/docs/): Complete guide to HAN digital assets and real-time pipelines.
+- [Introduction & Studio Vision (EN)](https://han.emirhangungormez.com.tr/docs/intro/): Studio philosophy, engineering standards, and visual fidelity principles.
+- [Support & Technical Inquiries (EN)](https://han.emirhangungormez.com.tr/docs/support/): Technical inquiries, bug reports, and commercial licensing partnerships.
+- [Fab: Download & Setup Guide (EN)](https://han.emirhangungormez.com.tr/docs/fab/getting-started/): Step-by-step asset acquisition, UE5 project integration, and showcase level overview.
+- [Fab: Unreal Engine 5 Integration (EN)](https://han.emirhangungormez.com.tr/docs/fab/unreal-engine/): Nanite geometry, Lumen dynamic global illumination, Master Material parameters, and Virtual Texturing.
+- [Fab: Unity Integration Guide (EN)](https://han.emirhangungormez.com.tr/docs/fab/unity/): URP & HDRP pipelines, ORM channel map allocation, and Prefab/LOD hierarchies.
+- [Fab: Optimization Standards (EN)](https://han.emirhangungormez.com.tr/docs/fab/optimization/): 10.24 px/cm Texel Density, draw call budgets, and custom convex collision specifications.
+
+## Documentation in Turkish (Türkçe Dokümantasyon)
+
+- [Dokümantasyon Merkezi (TR)](https://han.emirhangungormez.com.tr/docs/tr/): HAN dijital deneyimler ve Fab varlıkları merkezi.
+- [Giriş ve Stüdyo Vizyonu (TR)](https://han.emirhangungormez.com.tr/docs/tr/intro/): Stüdyo üretim felsefesi ve gerçek zamanlı 3D teknolojileri.
+- [Destek ve İletişim (TR)](https://han.emirhangungormez.com.tr/docs/tr/support/): Teknik destek, hata bildirimleri ve ticari iş birlikleri.
+- [Fab: İndirme ve Kurulum (TR)](https://han.emirhangungormez.com.tr/docs/tr/fab/getting-started/): Fab varlıklarını projeye aktarma rehberi.
+- [Fab: Unreal Engine 5 Entegrasyonu (TR)](https://han.emirhangungormez.com.tr/docs/tr/fab/unreal-engine/): Nanite, Lumen, Virtual Texturing ve Master Material kılavuzu.
+- [Fab: Unity Entegrasyonu (TR)](https://han.emirhangungormez.com.tr/docs/tr/fab/unity/): URP, HDRP ve ORM doku kanalları kılavuzu.
+- [Fab: Optimizasyon Standartları (TR)](https://han.emirhangungormez.com.tr/docs/tr/fab/optimization/): Texel Density, Draw call bütçeleri ve çarpışma geometrisi.
