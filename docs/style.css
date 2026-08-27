@@ -1239,3 +1239,87 @@ code, :not(pre) > code {
     line-height: 1.6;
     font-weight: 350;
 }
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS & TOUCH OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .docs-header {
+        padding: 0 1rem;
+    }
+    
+    .docs-header-center {
+        margin: 0 0.5rem;
+    }
+
+    .docs-search-btn-left span {
+        display: none;
+    }
+
+    .docs-search-btn {
+        justify-content: center;
+        padding: 0 0.5rem;
+    }
+
+    .docs-search-btn .docs-kbd {
+        display: none;
+    }
+
+    .docs-btn-fab span {
+        display: none;
+    }
+
+    .docs-btn-fab {
+        padding: 0.35rem 0.55rem;
+    }
+
+    .docs-main {
+        padding: 1.75rem 1rem 4rem 1rem;
+    }
+
+    .docs-title {
+        font-size: 1.65rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .docs-lead {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        margin-bottom: 2rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .docs-article h2,
+    .docs-content h2 {
+        font-size: 1.2rem;
+        margin: 2.25rem 0 0.85rem 0;
+    }
+
+    .docs-article h3,
+    .docs-content h3 {
+        font-size: 1rem;
+        margin: 1.75rem 0 0.65rem 0;
+    }
+
+    .docs-pagination {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+    }
+
+    .docs-page-nav-card {
+        max-width: 100%;
+    }
+
+    .bp-grid, .docs-card-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .docs-sidebar {
+        width: 290px;
+        max-width: 85vw;
+    }
+}
+
