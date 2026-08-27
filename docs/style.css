@@ -363,10 +363,10 @@ strong, b,
 /* Section Header (e.g. Get Started / Muted over-title) */
 .docs-sidebar-section-title {
     font-size: 0.72rem;
-    font-weight: 400;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
     padding: 0.4rem 0.5rem 0.2rem 0.5rem;
     user-select: none;
 }

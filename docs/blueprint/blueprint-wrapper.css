@@ -32,9 +32,9 @@
 
 .bue-pill {
     background: #0284c7;
-    color: #ffffff;
+    color: #ffffff !important;
     font-size: 0.65rem;
-    font-weight: 800;
+    font-weight: 700;
     padding: 2px 6px;
     border-radius: 4px;
     letter-spacing: 0.05em;
@@ -42,8 +42,8 @@
 
 .bue-title {
     font-size: 0.85rem;
-    font-weight: 600;
-    color: #f4f4f5;
+    font-weight: 500;
+    color: #f4f4f5 !important;
 }
 
 .bue-actions {
